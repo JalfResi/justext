@@ -17,7 +17,6 @@ func preprocess(htmlStr, encoding, defaultEncoding, encErrors string) *html.Node
 	addKwTags(root)
 	removeElements(root, []string{"head", "script", "style"})
 
-
 	return root
 }
 

@@ -2,6 +2,7 @@ package gojustext
 
 import (
 	"html"
+	"log"
 	"os"
 	"regexp"
 	"strings"
@@ -60,6 +61,7 @@ func ParagraphObjectModel(htmlStr string) ([]*Paragraph, os.Error) {
 	var paragraph *Paragraph = &Paragraph{WordCount:0, LinkedCharCount: 0, TagCount: 0}
 	var link bool = false
 	var br bool = false
+	var matchToDoErrors *regexp.Regexp = regexp.MustCompile("^html: TODO: ")
 
 	var startNewParagraph func()
 	startNewParagraph = func() {
@@ -84,6 +86,10 @@ func ParagraphObjectModel(htmlStr string) ([]*Paragraph, os.Error) {
 		case html.ErrorToken:
 			if z.Error() == os.EOF {
 				return paragraphs, nil	
+			}
+			if matchToDoErrors.MatchString(z.Error().String()) {
+				log.Println(z.Error())
+				continue	
 			}
 			return nil, z.Error()
 		

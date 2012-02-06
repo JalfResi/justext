@@ -70,7 +70,7 @@ func ParagraphObjectModel(htmlStr string) ([]*Paragraph, os.Error) {
 			paragraphs = append(paragraphs, paragraph)
 		}
 		paragraph = &Paragraph{
-			DomPath: strings.Join(dom, " "), 
+			DomPath: strings.Join(dom, "."), 
 			WordCount:0, 
 			LinkedCharCount: 0, 
 			TagCount: 0,

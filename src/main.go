@@ -16,13 +16,11 @@ func Process(htmlStr string) string {
 	if err != nil {
 		log.Fatal(err)
 	}
-
 	if p == nil {
 		log.Fatal("P is nil")
 	}
 
-	htmlStr = nodesToString(root)
-	//fmt.Println(htmlStr)
+	classifyParagraphs(p, stoplist map[string]bool, lengthLow int, lengthHigh int stopwordsLow float, stopwordsHigh float, maxLinkDensity float, noHeadings bool)
 
 /*
 	for _, para := range p {

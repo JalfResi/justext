@@ -6,5 +6,6 @@ GOFILES=\
 	preprocess.go\
 	paragraphObjectModel.go\
 	htmlRenderer.go\
+	classifyParagraphs.go\
 
 include $(GOROOT)/src/Make.pkg

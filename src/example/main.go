@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"io/ioutil"
 	"os"
 	"ourscienceistight/gojustext"
@@ -13,6 +14,6 @@ func main() {
 
 
 	htmlStr = gojustext.Process(htmlStr)
-
+	fmt.Println(htmlStr)
 }
 

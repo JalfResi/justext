@@ -10,3 +10,7 @@ src/example/gojustext
 src/example/index.html
 
 src/main.go_old
+
+src/.DS_Store
+
+src/stoplists/.DS_Store

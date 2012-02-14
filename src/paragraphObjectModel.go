@@ -52,6 +52,12 @@ type Paragraph struct {
 	LinkedCharCount int
 	TagCount int
 	Text string
+	StopwordCount int
+	StopwordDensity float64
+	LinkDensity float64
+	Heading bool
+	CfClass string
+	Class string
 }
 
 func ParagraphObjectModel(htmlStr string) ([]*Paragraph, os.Error) {
@@ -85,17 +91,21 @@ func ParagraphObjectModel(htmlStr string) ([]*Paragraph, os.Error) {
 		
 		case html.ErrorToken:
 			if z.Error() == os.EOF {
+				log.Println("EOF")
 				return paragraphs, nil	
 			}
 			if matchToDoErrors.MatchString(z.Error().String()) {
+				log.Println("ToDo Error")
 				log.Println(z.Error())
 				continue	
 			}
-			return nil, z.Error()
+			log.Println("Other error")
+			continue
 		
 		case html.StartTagToken:
 			tmpName, _ := z.TagName()
 			name := string(tmpName)
+			log.Println("Matched start tag: ", name)
 			dom = append(dom, name)
 			_, ok := paragraphTags[name]
 			if ok || (name == "br" && br) {
@@ -118,6 +128,7 @@ func ParagraphObjectModel(htmlStr string) ([]*Paragraph, os.Error) {
 		case html.EndTagToken:
 			tmpName, _ := z.TagName()
 			name := string(tmpName)
+			log.Println("Matched end tag: ", name)
 			dom = dom[0:len(dom)-1]
 			if _, ok := paragraphTags[name]; ok {
 				startNewParagraph()
@@ -128,6 +139,7 @@ func ParagraphObjectModel(htmlStr string) ([]*Paragraph, os.Error) {
 
 		case html.TextToken:
 			text := strings.TrimSpace(string(z.Text()))
+			log.Println("Matched text: ", text[:15], "...")
 			if text == "" {
 				continue
 			}

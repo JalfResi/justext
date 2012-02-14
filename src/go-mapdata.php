@@ -25,7 +25,13 @@ $parser->addOption('package', array(
 $parser->addOption('name', array(
     'short_name'  => '-n',
     'long_name'   => '--name',
-    'description' => 'array name (defaults to MyArray)',
+    'description' => 'variable name (defaults to MyVar)',
+    'action'      => 'StoreString'
+));
+$parser->addOption('type', array(
+    'short_name'  => '-t',
+    'long_name'   => '--type',
+    'description' => 'the output type; map(map[string]bool) or array([]string) (defaults to array)',
     'action'      => 'StoreString'
 ));
 try {
@@ -40,24 +46,61 @@ try {
 $input = (is_null($result->options['filename']))?'php://stdin':$result->options['filename'];
 $lines = file($input, FILE_IGNORE_NEW_LINES|FILE_SKIP_EMPTY_LINES);
 
+// Escape quote chars
+$lines = str_replace('"', '\"', $lines);
+
 $output = (is_null($result->options['output']))?'php://stdout':$result->options['output'];
 $out = fopen($output, 'w+');
 
 $packageName = (is_null($result->options['package']))?'main':$result->options['package'];
 $arrayName = (is_null($result->options['name']))?'MyArray':$result->options['name'];
+$type = (is_null($result->options['type']))?'array':$result->options['type'];
 
-$head = <<<head
+    switch($type) {
+        case 'array':
+            $head = <<<head
 package %s
 
 var %s = []string {
 head;
-
-$foot = <<<foot
+            $foot = <<<foot
 }
 foot;
+            $linePrefix = '"';
+            $lineSuffix = "\",\n";
+            break;
+
+        case 'map':
+            $head = <<<head
+package %s
+
+var %s = map[string]bool {
+head;
+            $foot = <<<foot
+}
+foot;
+            $linePrefix = '"';
+            $lineSuffix = "\": true,\n";
+            break;
+
+        default:
+            echo "Unrecognised type\n";
+            exit(1);
+    }
+
+
+function modifyLines($line) {
+    global $linePrefix, $lineSuffix;
+    if(strlen($line)==0)
+        return $line;
+
+    return $linePrefix . $line . $lineSuffix;
+}
+
+$lines = array_map("modifyLines", $lines);
 
 fwrite($out, sprintf($head, $packageName, $arrayName));
-fwrite($out, sprintf("\n\"%s\"\n", implode("\",\n\"", $lines)));
+fwrite($out, implode("", $lines));
 fwrite($out, $foot);
 fclose($out);
 

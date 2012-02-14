@@ -1,6 +1,11 @@
 package gojustext
 
-func classifyParagraphs(paragraphs []*Paragraph, stoplist map[string]bool, lengthLow int, lengthHigh int stopwordsLow float, stopwordsHigh float, maxLinkDensity float, noHeadings bool) {
+import(
+	"strings"
+	"regexp"
+)
+
+func classifyParagraphs(paragraphs []*Paragraph, stoplist map[string]bool, lengthLow int, lengthHigh int, stopwordsLow float64, stopwordsHigh float64, maxLinkDensity float64, noHeadings bool) {
 	for _, paragraph := range paragraphs {
 		var length int = len(paragraph.Text)
 		var stopwordCount int = 0
@@ -10,30 +15,30 @@ func classifyParagraphs(paragraphs []*Paragraph, stoplist map[string]bool, lengt
 			}
 		}
 
-		var stopwordDensity float = 0.0
-		var linkDensity float = 0.0
+		var stopwordDensity float64 = 0.0
+		var linkDensity float64 = 0.0
 		var wordCount int = paragraph.WordCount
 
 		if wordCount > 0 {
-			stopwordDensity = 1.0 * stopwordCount/wordCount
-			linkDensity = float(paragraph.LinkedCharCount)/length
+			stopwordDensity = 1.0 * float64(stopwordCount)/float64(wordCount)
+			linkDensity = float64(paragraph.LinkedCharCount)/float64(length)
 		}
 
 		paragraph.StopwordCount = stopwordCount
 		paragraph.StopwordDensity = stopwordDensity
 		paragraph.LinkDensity = linkDensity
 
-		var findHeadings *regexp.Regexp = regexp.MustCompile("(^h\d|\.h\d)")
-		paragraph.Heading = bool(!noHeadings && findHeadings.FindString(paragraph.DomPath))
+		var findHeadings *regexp.Regexp = regexp.MustCompile("(^h[123456]|.h[123456])")
+		paragraph.Heading = bool(!noHeadings && findHeadings.MatchString(paragraph.DomPath))
 
 		var copyrightChar *regexp.Regexp = regexp.MustCompile("(\xa9|&copy)")
-		var findSelect *regexp.Regexp = regexp.MustCompile("(^select|\.select)")
+		var findSelect *regexp.Regexp = regexp.MustCompile("(^select|.select)")
 
 		if linkDensity > maxLinkDensity {
 			paragraph.CfClass = "bad"
-		} else if copyrightChar.FindString(paragraph.Text) {
+		} else if copyrightChar.MatchString(paragraph.Text) {
 			paragraph.CfClass = "bad"			
-		} else if findSelect.FindString(paragraph.DomPath) {
+		} else if findSelect.MatchString(paragraph.DomPath) {
 			paragraph.CfClass = "bad"			
 		} else {
 			if length < lengthLow {

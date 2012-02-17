@@ -22,7 +22,7 @@ func nodesToString(node *html.Node) string {
 	var response string = ""
 	switch node.Type {
 		case html.TextNode:
-			response = fmt.Sprintf("%s", node.Data)
+			response = fmt.Sprintf("%s", html.EscapeString(node.Data))
 
 		case html.ElementNode:
 			var att string = ""

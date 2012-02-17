@@ -96,8 +96,8 @@ func ParagraphObjectModel(htmlStr string) ([]*Paragraph, os.Error) {
 			}
 			if matchToDoErrors.MatchString(z.Error().String()) {
 				log.Println("ToDo Error")
-				log.Println(z.Error())
-				continue	
+				log.Fatal(z.Error())
+					
 			}
 			log.Println("Other error")
 			continue
@@ -139,7 +139,11 @@ func ParagraphObjectModel(htmlStr string) ([]*Paragraph, os.Error) {
 
 		case html.TextToken:
 			text := strings.TrimSpace(string(z.Text()))
-			log.Println("Matched text: ", text[:15], "...")
+			e := 15
+			if(len(text)<e) {
+				e = len(text)
+			}
+			log.Println("Matched text: ", text[:e], "...")
 			if text == "" {
 				continue
 			}

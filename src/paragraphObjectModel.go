@@ -105,7 +105,7 @@ func ParagraphObjectModel(htmlStr string) ([]*Paragraph, os.Error) {
 		case html.StartTagToken:
 			tmpName, _ := z.TagName()
 			name := string(tmpName)
-			log.Println("Matched start tag: ", name)
+			//log.Println("Matched start tag: ", name)
 			dom = append(dom, name)
 			_, ok := paragraphTags[name]
 			if ok || (name == "br" && br) {
@@ -128,7 +128,7 @@ func ParagraphObjectModel(htmlStr string) ([]*Paragraph, os.Error) {
 		case html.EndTagToken:
 			tmpName, _ := z.TagName()
 			name := string(tmpName)
-			log.Println("Matched end tag: ", name)
+			//log.Println("Matched end tag: ", name)
 			dom = dom[0:len(dom)-1]
 			if _, ok := paragraphTags[name]; ok {
 				startNewParagraph()
@@ -143,7 +143,7 @@ func ParagraphObjectModel(htmlStr string) ([]*Paragraph, os.Error) {
 			if(len(text)<e) {
 				e = len(text)
 			}
-			log.Println("Matched text: ", text[:e], "...")
+			//log.Println("Matched text: ", text[:e], "...")
 			if text == "" {
 				continue
 			}

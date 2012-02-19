@@ -42,7 +42,7 @@ func Process(htmlStr string) string {
 	reviseParagraphClassification(p, MAX_HEADING_DISTANCE_DEFAULT)
 
 	//outputDefault(p, true)
-	out := outputDebug(p)
+	out := outputDetailed(p)
 	fmt.Println(out)
 
 	//dump(p)

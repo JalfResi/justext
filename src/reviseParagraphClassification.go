@@ -56,7 +56,9 @@ func reviseParagraphClassification(paragraphs []*Paragraph, maxHeadingDistance i
 	}
 
 	for i, c := range newClasses {
-		paragraphs[i].Class = c
+		if c != "" {
+			paragraphs[i].Class = c
+		}
 	}
 
 	// revise neargood
@@ -91,12 +93,6 @@ func reviseParagraphClassification(paragraphs []*Paragraph, maxHeadingDistance i
 			j += 1
 		}
 	}	
-
-	for _, paragraph := range paragraphs {
-		if paragraph.Class == "" {
-			paragraph.Class = "good"
-		}
-	}
 }
 
 func getPrevNeighbour(i int, paragraphs []*Paragraph, ignoreNeargood bool) string {

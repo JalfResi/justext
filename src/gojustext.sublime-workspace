@@ -1,0 +1,269 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "Packages/User/GoMake.sublime-build",
+	"command_palette":
+	{
+		"height": 392.0,
+		"selected_items":
+		[
+			[
+				"p",
+				"Package Control: Remove Package"
+			],
+			[
+				"pa",
+				"Preferences: Browse Packages"
+			],
+			[
+				"pack",
+				"Package Control: Remove Package"
+			],
+			[
+				"dis",
+				"Package Control: Disable Package"
+			]
+		],
+		"width": 449.0
+	},
+	"console":
+	{
+		"height": 122.0
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": true,
+		"show_tabs": true,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/Users/bendavies/Projects/nuseagent/src/Makefile",
+		"/Users/bendavies/Projects/nuseagent/src/config/Mapper.go",
+		"/Users/bendavies/Projects/nuseagent/src/config/Config.go",
+		"/Users/bendavies/Library/Application Support/Sublime Text 2/Packages/User/Base File.sublime-settings",
+		"/Users/bendavies/Library/Application Support/Sublime Text 2/Packages/User/Global.sublime-settings",
+		"/Users/bendavies/Projects/nuseagent/src/main.go",
+		"/Users/bendavies/Projects/nuseagent/src/datamaps/sqlite/news.go",
+		"/Users/bendavies/Projects/nuseagent/src/datamaps/sqlite/Makefile",
+		"/Users/bendavies/Projects/nuseagent/src/models/FeedManager.go",
+		"/Users/bendavies/Projects/nuseagent/src/readability/example/main.go",
+		"/Users/bendavies/Projects/nuseagent/src/readability/readability.go",
+		"/Users/bendavies/Projects/nuseagent/src/news/Service.go",
+		"/Users/bendavies/Projects/nuseagent/src/news/News.go",
+		"/Users/bendavies/Projects/nuseagent/src/news/Mapper.go",
+		"/Users/bendavies/Projects/nuseagent/src/news/Makefile",
+		"/Users/bendavies/Projects/nuseagent/src/readability/Makefile",
+		"/Users/bendavies/Projects/nuseagent/src/feed/Service.go",
+		"/Users/bendavies/Projects/nuseagent/src/handlers/FeedHandler.go",
+		"/Users/bendavies/Projects/nuseagent/src/handlers/ConfigHandler.go",
+		"/Users/bendavies/Desktop/visio.vdx",
+		"/Users/bendavies/Desktop/DEFCON.vdx",
+		"/Users/bendavies/Projects/nuseagent/src/resources/Makefile",
+		"/Users/bendavies/Projects/nuseagent/src/resources/src/jsFirehose.go",
+		"/Users/bendavies/Projects/nuseagent/design/web/index.html",
+		"/Users/bendavies/Library/Application Support/Sublime Text 2/Packages/User/Go.sublime-build",
+		"/Users/bendavies/Projects/nuseagent/src/resources/src/main.go",
+		"/Users/bendavies/Projects/nuseagent/src/resources/src/likeImg.go",
+		"/Users/bendavies/Projects/nuseagent/src/resources/src/configErrorTemplate.go",
+		"/Users/bendavies/Projects/nuseagent/src/config/Makefile",
+		"/Users/bendavies/Projects/nuseagent/src/handlers/WebsocketController.go",
+		"/Users/bendavies/Projects/nuseagent/src/datamaps/sqlite/main.go",
+		"/Users/bendavies/Projects/nuseagent/src/datamaps/sqlite/config.go",
+		"/Users/bendavies/Projects/GoTidy/main.go",
+		"/Users/bendavies/Library/Application Support/Sublime Text 2/Packages/User/GoMake.sublime-build",
+		"/Users/bendavies/Library/Application Support/Sublime Text 2/Packages/Default/Global.sublime-settings",
+		"/Users/bendavies/Projects/GoTidy/consts.go",
+		"/Users/bendavies/Projects/GoTidy/README.markdown",
+		"/Users/bendavies/Projects/GoTidy/README",
+		"/Users/bendavies/go/src/cmd/cgo/out.go",
+		"/Users/bendavies/go/src/cmd/cgo/util.go",
+		"/Users/bendavies/go/src/cmd/cgo/main.go",
+		"/Users/bendavies/go/src/cmd/cgo/doc.go",
+		"/Users/bendavies/Projects/nuseagent/homepageTemplate.go",
+		"/Users/bendavies/Projects/nuseagent/datamappers/ConfigDatamapper.go",
+		"/Users/bendavies/Projects/nuseagent/javascript/firehose.js",
+		"/Users/bendavies/Projects/nuseagent/controllers/HomepageController.go",
+		"/Users/bendavies/Projects/nuseagent/controllers/ConfigController.go",
+		"/Users/bendavies/Projects/nuseagent/controllers/FeedsController.go",
+		"/Users/bendavies/Projects/nuseagent/models/Hub.go",
+		"/Users/bendavies/Projects/nuseagent/datamappers/FeedDatamapper.go",
+		"/Users/bendavies/Projects/nuseagent/controllers/WebsocketController.go",
+		"/Users/bendavies/Projects/nuseagent/sql/sql.go",
+		"/Users/bendavies/Documents/NuseAgent UI/index.html",
+		"/Users/bendavies/Documents/NuseAgent UI/css/fontsitesans.css",
+		"/Users/bendavies/Documents/NuseAgent UI/css/baseline.css",
+		"/Users/bendavies/Projects/nuseagent/packages/readabilty/readability.py",
+		"/Users/bendavies/Projects/nuseagent/packages/readabilty/readability.go",
+		"/Users/bendavies/Documents/Blog Articles/ixdbauhaus.txt",
+		"/Users/bendavies/Projects/nuseagent/TODO.md",
+		"/Users/bendavies/Projects/nuseagent/packages/readabilty/example/main.go",
+		"/Users/bendavies/Projects/nuseagent/models/FeedItem.go",
+		"/Users/bendavies/Projects/nuseagent/models/FeedManager.go",
+		"/Users/bendavies/Projects/nuseagent/datamappers/NewsArticlesDatamapper.go",
+		"/Users/bendavies/Projects/nuseagent/Makefile",
+		"/Users/bendavies/Projects/nuseagent/datamappers/DataMapperInterface.go",
+		"/Users/bendavies/Projects/nuseagent/services/NewsService.go",
+		"/Users/bendavies/Projects/nuseagent/models/NewsItem.go",
+		"/Users/bendavies/Projects/nuseagent/datamappers/SQLiteDataMapper.go",
+		"/Users/bendavies/Projects/nuseagent/models/Config.go",
+		"/Users/bendavies/Projects/nuseagent/services/FeedService.go",
+		"/Users/bendavies/Projects/nuseagent/services/ConfigService.go",
+		"/Users/bendavies/Projects/nuseagent/templates/home.htm",
+		"/Users/bendavies/Projects/nuseagent/datamappers/Database.go",
+		"/Users/bendavies/Projects/nuseagent/models/FavIcon.go",
+		"/Users/bendavies/Projects/nuseagent/main.go",
+		"/Users/bendavies/Projects/godom/node.go",
+		"/Users/bendavies/Projects/nuseagent/packages/readabilty/example/test.html",
+		"/Users/bendavies/Projects/nuseagent/packages/readabilty/Readability-php.go",
+		"/Users/bendavies/Projects/nuseagent/packages/readabilty/example/Makefile",
+		"/Users/bendavies/Projects/godom/core_interfaces.go",
+		"/Users/bendavies/Projects/godom/nodelists.go",
+		"/Users/bendavies/Projects/godom/dom.go",
+		"/Users/bendavies/Projects/godom/text.go",
+		"/Users/bendavies/Projects/godom/characterdata.go",
+		"/Users/bendavies/Projects/gosqlite/sqlite/sqlite.go",
+		"/Users/bendavies/Projects/godom/document.go",
+		"/Users/bendavies/Downloads/Readability.php",
+		"/Users/bendavies/Projects/nuseagent/packages/readabilty/Makefile",
+		"/Users/bendavies/Projects/nuseagent/packages/readabilty/Readability.go",
+		"/Users/bendavies/Projects/nuseagent/services/Readability.go",
+		"/Users/bendavies/Projects/nuseagent/templates/item.htm",
+		"/Users/bendavies/Desktop/perspective.html",
+		"/Users/bendavies/Projects/nuseagent/TODO.txt",
+		"/Users/bendavies/Desktop/newsitem.sql",
+		"/Users/bendavies/Projects/nuseagent/controllers/NewTemplateHandler.go",
+		"/Users/bendavies/Projects/godom/attr.go",
+		"/Users/bendavies/Projects/godom/element.go",
+		"/Users/bendavies/Projects/godom/comment.go",
+		"/Users/bendavies/Library/Application Support/Sublime Text 2/Packages/Makefile/Make.sublime-build",
+		"/Users/bendavies/Library/Application Support/Sublime Text 2/Packages/User/gomake.sublime-build"
+	],
+	"find":
+	{
+		"height": 33.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": true,
+		"find_history":
+		[
+			"=\"1\"",
+			"javascriptDir",
+			"templatesDir",
+			"this",
+			"feedWatcher",
+			"CString",
+			"tdy",
+			"input",
+			"CBool",
+			"tidyBufFree",
+			"GoString",
+			"cs",
+			"img",
+			"sqlCreateNewsItemTable",
+			"feedManager",
+			"\n\nFeedManager",
+			"reflect.Typeof	",
+			"Text"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"feedWatcher",
+			"t",
+			"cBool"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 0.0
+	},
+	"input":
+	{
+		"height": 28.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"replace":
+	{
+		"height": 62.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"selected_items":
+		[
+		],
+		"width": 380.0
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 253.0,
+	"status_bar_visible": true
+}

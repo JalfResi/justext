@@ -5,7 +5,7 @@ import(
 	"strings"
 )
 
-func outputDefault(paragraphs []*Paragraph, noBoilerplate bool) {
+func OutputDefault(paragraphs []*Paragraph, noBoilerplate bool) {
 	for _, paragraph := range paragraphs {
 		var tag string
 		if paragraph.Class == "good" {
@@ -25,7 +25,7 @@ func outputDefault(paragraphs []*Paragraph, noBoilerplate bool) {
 	}
 }
 
-func outputDetailed(paragraphs []*Paragraph) (output string) {
+func OutputDetailed(paragraphs []*Paragraph) (output string) {
 	for _, paragraph := range paragraphs {
 		output = fmt.Sprintf("%s<p class=\"%s\" cfclass=\"%s\" heading=\"%t\"> %s", output, paragraph.Class, paragraph.CfClass, paragraph.Heading, strings.TrimSpace(paragraph.Text))
 	}
@@ -33,7 +33,7 @@ func outputDetailed(paragraphs []*Paragraph) (output string) {
 	return output
 }
 
-func outputDebug(paragraphs []*Paragraph) (output string) {
+func OutputDebug(paragraphs []*Paragraph) (output string) {
 	var counter int = 1
 	for _, paragraph := range paragraphs {
 		output = fmt.Sprintf("%s<p class=\"%s\" cfclass=\"%s\" heading=\"%t\"> %s", output, paragraph.Class, paragraph.CfClass, paragraph.Heading, strings.TrimSpace(paragraph.Text))

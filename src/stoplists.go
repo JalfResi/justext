@@ -102,3 +102,7 @@ var stoplists = map[string] map[string]bool {
 	"Western_Panjabi": Western_PanjabiStoplist,
 	"Yoruba": YorubaStoplist,
 }
+
+func GetStoplist(language string) map[string]bool {
+	return stoplists[language]
+}

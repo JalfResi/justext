@@ -16,20 +16,21 @@ const(
 	MAX_HEADING_DISTANCE_DEFAULT = 200
 )
 
-/*
-func Justext(htmlText string, stoplist []string, lengthLow int, lengthHigh int, stopwordsLow float64, stopwordsHigh float64, maxLinkDensity float64, maxHeadingDistance int, noHeadings bool, encoding string, defaultEncoding string, encErrors string) []*Paragraph {
+// Encoding stuff...
+// Do we need to do this?
+// We probably should, just to be feature complete.
+//
+//func Justext(htmlText string, stoplist map[string]bool, lengthLow int, lengthHigh int, stopwordsLow float64, stopwordsHigh float64, maxLinkDensity float64, maxHeadingDistance int, noHeadings bool, encoding string, defaultEncoding string, encErrors string) []*Paragraph {
+
+
+func Justext(htmlText string, stoplist map[string]bool, lengthLow int, lengthHigh int, stopwordsLow float64, stopwordsHigh float64, maxLinkDensity float64, maxHeadingDistance int, noHeadings bool) []*Paragraph {
 	
-}
-*/
+	htmlText = utf8.NewString(htmlText).String()
 
-func Process(htmlStr string) string {
-	
-	htmlStr = utf8.NewString(htmlStr).String()
+	root := preprocess(htmlText, "utf-8", "utf-8", "errors")
+	htmlText = nodesToString(root)
 
-	root := preprocess(htmlStr, "utf-8", "utf-8", "errors")
-	htmlStr = nodesToString(root)
-
-	p, err := ParagraphObjectModel(htmlStr)
+	p, err := ParagraphObjectModel(htmlText)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -37,17 +38,10 @@ func Process(htmlStr string) string {
 		log.Fatal("MAIN: P is nil", err)
 	}
 
-	classifyParagraphs(p, stoplists["English"], LENGTH_LOW_DEFAULT, LENGTH_HIGH_DEFAULT, STOPWORDS_LOW_DEFAULT, STOPWORDS_HIGH_DEFAULT, MAX_LINK_DENSITY_DEFAULT, NO_HEADINGS_DEFAULT)
+	classifyParagraphs(p, stoplist, lengthLow, lengthHigh, stopwordsLow, stopwordsHigh, maxLinkDensity, noHeadings)
+	reviseParagraphClassification(p, maxHeadingDistance)
 
-	reviseParagraphClassification(p, MAX_HEADING_DISTANCE_DEFAULT)
-
-	//outputDefault(p, true)
-	out := outputDetailed(p)
-	fmt.Println(out)
-
-	//dump(p)
-
-	return htmlStr
+	return p
 }
 
 func dump(p []*Paragraph) {

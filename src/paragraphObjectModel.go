@@ -91,7 +91,6 @@ func ParagraphObjectModel(htmlStr string) ([]*Paragraph, os.Error) {
 		
 		case html.ErrorToken:
 			if z.Error() == os.EOF {
-				log.Println("EOF")
 				return paragraphs, nil	
 			}
 			if matchToDoErrors.MatchString(z.Error().String()) {

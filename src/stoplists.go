@@ -1,6 +1,16 @@
 package gojustext
 
-var stoplists = map[string] map[string]bool {
+import(
+	"bytes"
+	"csv"
+	"log"
+	"os"
+	"fmt"
+)
+
+type ResourceFunc func() ([]byte, os.Error)
+
+var stoplists = map[string]ResourceFunc {
 	"Afrikaans": AfrikaansStoplist,
 	"Albanian": AlbanianStoplist,
 	"Arabic": ArabicStoplist,
@@ -103,6 +113,29 @@ var stoplists = map[string] map[string]bool {
 	"Yoruba": YorubaStoplist,
 }
 
-func GetStoplist(language string) map[string]bool {
-	return stoplists[language]
+func GetStoplist(language string) (map[string]bool, os.Error) {
+	if _, ok := stoplists[language]; !ok {
+		return nil, os.NewError(fmt.Sprintf("Language %s not supported", language))
+	}
+
+	data, err := stoplists[language]()
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	r := csv.NewReader(bytes.NewBuffer(data));
+	r.LazyQuotes = true
+	
+	result, err := r.ReadAll()
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	// Convert to map
+	var list = make(map[string]bool)
+	for _, fields := range result {
+		list[fields[0]] = true
+	}
+
+	return list, nil
 }

@@ -7,20 +7,14 @@ src/example/_go_.6
 
 src/example/gojustext
 
-src/example/index.html
-
 src/main.go_old
 
 src/.DS_Store
 
 src/stoplists/.DS_Store
 
-src/example/theverge-out.html
+src/example/*.html
 
-src/example/theverge-out.html
+src/example/*.htm
 
-src/example/theverge-tidy.html
-
-src/example/theverge-out.html
-
-src/example/out.html
+src/stoplists/*.txt

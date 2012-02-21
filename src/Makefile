@@ -114,4 +114,5 @@ GOFILES=\
 include $(GOROOT)/src/Make.pkg
 
 stoplists/%.go:
-	php go-mapdata.php -tmap -fhttp://justext.googlecode.com/svn/trunk/justext/stoplists/$*.txt -o"stoplists/$*.go" -n"$*Stoplist" -p"gojustext"
+	wget -Ostoplists/$*.txt http://justext.googlecode.com/svn/trunk/justext/stoplists/$*.txt
+	go-bindata -i=stoplists/$*.txt -o="stoplists/$*.go" -f="$*Stoplist" -p="gojustext"

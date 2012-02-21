@@ -5,7 +5,7 @@ import(
 	"strings"
 )
 
-func OutputDefault(paragraphs []*Paragraph, noBoilerplate bool) {
+func OutputDefault(paragraphs []*Paragraph, noBoilerplate bool) (output string) {
 	for _, paragraph := range paragraphs {
 		var tag string
 		if paragraph.Class == "good" {
@@ -21,8 +21,10 @@ func OutputDefault(paragraphs []*Paragraph, noBoilerplate bool) {
 				tag = "b"
 			}
 		}
-		fmt.Printf("<%s> %s", tag, strings.TrimSpace(paragraph.Text))
+		output = fmt.Sprintf("%s<%s>%s</%s>", output, tag, strings.TrimSpace(paragraph.Text), tag)
 	}
+
+	return output
 }
 
 func OutputDetailed(paragraphs []*Paragraph) (output string) {
@@ -81,4 +83,10 @@ func outputKrdwrd(paragraphs []*Paragraph) (output string) {
 	}
 
 	return output
+}
+
+func dump(p []*Paragraph) {
+	for _, para := range p {
+		fmt.Printf("%s\n\tText: %s\n\tTagCount: %d\n\tWordCount: %d\n\tLinkedCharCount: %d\n\tStopword Count: %d\n\tStopword Density: %f\n\tLink Density: %f\n\tHeading: %t\n\tClass: %s\n\tCfClass: %s\n", para.DomPath, para.Text, para.TagCount, para.WordCount, para.LinkedCharCount, para.StopwordCount, para.StopwordDensity, para.LinkDensity, para.Heading, para.Class, para.CfClass)
+	}	
 }

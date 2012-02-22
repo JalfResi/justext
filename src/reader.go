@@ -57,5 +57,11 @@ func (r *Reader) ReadAll() (htmlStr string, err os.Error) {
 	classifyParagraphs(p, stoplist, r.LengthLow, r.LengthHigh, r.StopwordsLow, r.StopwordsHigh, r.MaxLinkDensity, r.NoHeadings)
 	reviseParagraphClassification(p, r.MaxHeadingDistance)
 
+	// NOTE: Might be best if this reader returned []paragraphs
+	// We can then have a Writer that takes []paragraphs and outputs it as HTML.
+	// The Writer could then have an option specifying detailed out, etc;
+	// and the Reader would be responsible for classification, the Writer
+	// for parsing the []paragraphs for output.
+
 	return OutputDefault(p, true), nil	
 }

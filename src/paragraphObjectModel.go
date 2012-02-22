@@ -60,7 +60,7 @@ type Paragraph struct {
 	Class string
 }
 
-func ParagraphObjectModel(htmlStr string) ([]*Paragraph, os.Error) {
+func paragraphObjectModel(htmlStr string) ([]*Paragraph, os.Error) {
 	
 	var dom []string
 	var paragraphs []*Paragraph

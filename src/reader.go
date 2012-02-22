@@ -40,13 +40,13 @@ func (r *Reader) ReadAll() (htmlStr string, err os.Error) {
 		return "", err
 	}
 
-	stoplist, err := GetStoplist(r.StoplistLanguage)
+	stoplist, err := getStoplist(r.StoplistLanguage)
 	if err != nil {
 		return "", err
 	}
 
 	root := preprocess(utf8.NewString(string(in)).String(), "utf-8", "utf-8", "errors")
-	p, err := ParagraphObjectModel(nodesToString(root))
+	p, err := paragraphObjectModel(nodesToString(root))
 	if err != nil {
 		return "", err
 	}

@@ -2,114 +2,15 @@ include $(GOROOT)/src/Make.inc
 
 TARG=ourscienceistight/gojustext
 GOFILES=\
-	main.go\
 	preprocess.go\
 	paragraphObjectModel.go\
 	htmlRenderer.go\
 	classifyParagraphs.go\
 	reviseParagraphClassification.go\
 	output.go\
+	reader.go\
 	stoplists.go\
-	stoplists/Afrikaans.go\
-	stoplists/Albanian.go\
-	stoplists/Arabic.go\
-	stoplists/Aragonese.go\
-	stoplists/Armenian.go\
-	stoplists/Aromanian.go\
-	stoplists/Asturian.go\
-	stoplists/Azerbaijani.go\
-	stoplists/Basque.go\
-	stoplists/Belarusian.go\
-	stoplists/Belarusian_Taraskievica.go\
-	stoplists/Bengali.go\
-	stoplists/Bishnupriya_Manipuri.go\
-	stoplists/Bosnian.go\
-	stoplists/Breton.go\
-	stoplists/Bulgarian.go\
-	stoplists/Catalan.go\
-	stoplists/Cebuano.go\
-	stoplists/Chuvash.go\
-	stoplists/Croatian.go\
-	stoplists/Czech.go\
-	stoplists/Danish.go\
-	stoplists/Dutch.go\
-	stoplists/English.go\
-	stoplists/Esperanto.go\
-	stoplists/Estonian.go\
-	stoplists/Finnish.go\
-	stoplists/French.go\
-	stoplists/Galician.go\
-	stoplists/Georgian.go\
-	stoplists/German.go\
-	stoplists/Greek.go\
-	stoplists/Gujarati.go\
-	stoplists/Haitian.go\
-	stoplists/Hebrew.go\
-	stoplists/Hindi.go\
-	stoplists/Hungarian.go\
-	stoplists/Icelandic.go\
-	stoplists/Ido.go\
-	stoplists/Igbo.go\
-	stoplists/Indonesian.go\
-	stoplists/Irish.go\
-	stoplists/Italian.go\
-	stoplists/Javanese.go\
-	stoplists/Kannada.go\
-	stoplists/Kazakh.go\
-	stoplists/Korean.go\
-	stoplists/Kurdish.go\
-	stoplists/Kyrgyz.go\
-	stoplists/Latin.go\
-	stoplists/Latvian.go\
-	stoplists/Lithuanian.go\
-	stoplists/Lombard.go\
-	stoplists/Low_Saxon.go\
-	stoplists/Luxembourgish.go\
-	stoplists/Macedonian.go\
-	stoplists/Malay.go\
-	stoplists/Malayalam.go\
-	stoplists/Maltese.go\
-	stoplists/Marathi.go\
-	stoplists/Neapolitan.go\
-	stoplists/Nepali.go\
-	stoplists/Newar.go\
-	stoplists/Norwegian_Bokmal.go\
-	stoplists/Norwegian_Nynorsk.go\
-	stoplists/Occitan.go\
-	stoplists/Persian.go\
-	stoplists/Piedmontese.go\
-	stoplists/Polish.go\
-	stoplists/Portuguese.go\
-	stoplists/Quechua.go\
-	stoplists/Romanian.go\
-	stoplists/Russian.go\
-	stoplists/Samogitian.go\
-	stoplists/Serbian.go\
-	stoplists/Serbo_Croatian.go\
-	stoplists/Sicilian.go\
-	stoplists/Simple_English.go\
-	stoplists/Slovak.go\
-	stoplists/Slovenian.go\
-	stoplists/Spanish.go\
-	stoplists/Sundanese.go\
-	stoplists/Swahili.go\
-	stoplists/Swedish.go\
-	stoplists/Tagalog.go\
-	stoplists/Tamil.go\
-	stoplists/Telugu.go\
-	stoplists/Turkish.go\
-	stoplists/Turkmen.go\
-	stoplists/Ukrainian.go\
-	stoplists/Urdu.go\
-	stoplists/Uzbek.go\
-	stoplists/Vietnamese.go\
-	stoplists/Volapuk.go\
-	stoplists/Walloon.go\
-	stoplists/Waray_Waray.go\
-	stoplists/Welsh.go\
-	stoplists/West_Frisian.go\
-	stoplists/Western_Panjabi.go\
-	stoplists/Yoruba.go\
+	stoplists/*.go\
 
 include $(GOROOT)/src/Make.pkg
 

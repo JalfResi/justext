@@ -3,7 +3,9 @@ package gojustext
 import(
 	"io"
 	"io/ioutil"
+	"log"
 	"os"
+	"utf8"
 )
 
 type Reader struct {
@@ -33,27 +35,27 @@ func NewReader(r io.Reader) *Reader {
 }
 
 func (r *Reader) ReadAll() (htmlStr string, err os.Error) {
-	in, err := ioutil.ReadAll(r)
+	in, err := ioutil.ReadAll(r.r)
 	if err != nil {
-		return nil, err
+		return "", err
 	}
 
-	stoplist, err := GetStoplist(jusText.StoplistLanguage)
+	stoplist, err := GetStoplist(r.StoplistLanguage)
 	if err != nil {
-		return nil, err
+		return "", err
 	}
 
-	root := preprocess(utf8.NewString(htmlText).String(), "utf-8", "utf-8", "errors")
+	root := preprocess(utf8.NewString(string(in)).String(), "utf-8", "utf-8", "errors")
 	p, err := ParagraphObjectModel(nodesToString(root))
 	if err != nil {
-		return nil, err
+		return "", err
 	}
 	if p == nil {
 		log.Fatal("MAIN: P is nil", err)
 	}
 
-	classifyParagraphs(p, stoplist, jusText.LengthLow, jusText.LengthHigh, jusText.StopwordsLow, jusText.StopwordsHigh, jusText.MaxLinkDensity, jusText.NoHeadings)
-	reviseParagraphClassification(p, jusText.MaxHeadingDistance)
+	classifyParagraphs(p, stoplist, r.LengthLow, r.LengthHigh, r.StopwordsLow, r.StopwordsHigh, r.MaxLinkDensity, r.NoHeadings)
+	reviseParagraphClassification(p, r.MaxHeadingDistance)
 
 	return OutputDefault(p, true), nil	
 }

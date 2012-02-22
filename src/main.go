@@ -1,13 +1,13 @@
 package gojustext
 
 import (
-	"fmt"
 	"log"
 	"os"
 	"utf8"
 )
 
 const(
+	STOPLIST_DEFAULT_LAGUAGE string = "English"
 	LENGTH_LOW_DEFAULT int = 70
 	LENGTH_HIGH_DEFAULT int = 200
 	STOPWORDS_LOW_DEFAULT float64 = 0.30
@@ -26,9 +26,9 @@ const(
 
 type JusText struct {
 	HtmlText string
-	Stoplist map[string]bool
 	LengthLow int
 	LengthHigh int
+	StoplistLanguage string
 	StopwordsLow float64
 	StopwordsHigh float64
 	MaxLinkDensity float64
@@ -40,6 +40,7 @@ func NewJusText() *JusText {
 	return &JusText{
 		LengthLow: LENGTH_LOW_DEFAULT,
 		LengthHigh: LENGTH_HIGH_DEFAULT,
+		StoplistLanguage: STOPLIST_DEFAULT_LAGUAGE,
 		StopwordsLow: STOPWORDS_LOW_DEFAULT,
 		StopwordsHigh: STOPWORDS_HIGH_DEFAULT,
 		MaxLinkDensity: MAX_LINK_DENSITY_DEFAULT,
@@ -48,8 +49,13 @@ func NewJusText() *JusText {
 	}
 }
 
-func (jusText *JusText)Process(htmlText string, stoplist map[string]bool) (string, os.Error) {
+func (jusText *JusText)Process(htmlText string) (string, os.Error) {
 	
+	stoplist, err := GetStoplist(jusText.StoplistLanguage)
+	if err != nil {
+		log.Fatal(err)
+	}
+
 	root := preprocess(utf8.NewString(htmlText).String(), "utf-8", "utf-8", "errors")
 	p, err := ParagraphObjectModel(nodesToString(root))
 	if err != nil {

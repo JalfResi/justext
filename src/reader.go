@@ -62,6 +62,9 @@ func (r *Reader) ReadAll() (htmlStr string, err os.Error) {
 	// The Writer could then have an option specifying detailed out, etc;
 	// and the Reader would be responsible for classification, the Writer
 	// for parsing the []paragraphs for output.
+	//
+	// The example app would then simply use copy to push the stdin to stdout
+	// e.g. io.Copy(writer, reader)
 
 	return OutputDefault(p, true), nil	
 }

@@ -1,0 +1,17 @@
+<html>
+<style>
+	.heading    { font-weight: bold; }
+	.class_good { background-color: #CCFFCC; }
+	.class_bad  { background-color: #FFDDDD; }
+
+	.cfclass_bad:before      { content: "Bad> "; }
+	.cfclass_short:before    { content: "Short> "; }
+	.cfclass_neargood:before { content: "NearGood> "; }
+	.cfclass_good:before     { content: "Good> "; }
+</style>
+<body>
+{{range .Paragraphs}}
+	<p class="class_{{.Class}} cfclass_{{.CfClass}}{{if .Heading}} .heading{{end}}">{{TrimSpace .Text}}</p>
+{{end}}
+</body>
+</html>

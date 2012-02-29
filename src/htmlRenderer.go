@@ -5,6 +5,11 @@ import (
 	"html"
 )
 
+/**
+ This should be a separte package!
+ And it should be a Writer!
+ */
+
 var selfClosingTags = map[string] bool {
 	"area": true,
 	"base": true,

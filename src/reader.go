@@ -34,21 +34,21 @@ func NewReader(r io.Reader) *Reader {
 	}
 }
 
-func (r *Reader) ReadAll() (htmlStr string, err os.Error) {
+func (r *Reader) ReadAll() ([]*Paragraph, os.Error) {
 	in, err := ioutil.ReadAll(r.r)
 	if err != nil {
-		return "", err
+		return nil, err
 	}
 
 	stoplist, err := getStoplist(r.StoplistLanguage)
 	if err != nil {
-		return "", err
+		return nil, err
 	}
 
 	root := preprocess(utf8.NewString(string(in)).String(), "utf-8", "utf-8", "errors")
 	p, err := paragraphObjectModel(nodesToString(root))
 	if err != nil {
-		return "", err
+		return nil, err
 	}
 	if p == nil {
 		log.Fatal("MAIN: P is nil", err)
@@ -66,5 +66,5 @@ func (r *Reader) ReadAll() (htmlStr string, err os.Error) {
 	// The example app would then simply use copy to push the stdin to stdout
 	// e.g. io.Copy(writer, reader)
 
-	return OutputDefault(p, true), nil	
+	return p, nil	
 }

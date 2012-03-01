@@ -104,41 +104,23 @@ func (w *Writer) outputDetailed(paragraphs []*Paragraph) os.Error {
 	return templ.Execute(w.w, data)
 }
 
-/**
- TO-DO:
-
-
-func OutputDebug(paragraphs []*Paragraph) (output string) {
-	var counter int = 1
+func (w *Writer) OutputDebug(paragraphs []*Paragraph) {
 	for _, paragraph := range paragraphs {
-		output = fmt.Sprintf("%s<p class=\"%s\" cfclass=\"%s\" heading=\"%t\"> %s", output, paragraph.Class, paragraph.CfClass, paragraph.Heading, strings.TrimSpace(paragraph.Text))
-
-		var rows []string
-		var tdtemp string = "<tr><td>%s</td><td>%s</td></tr>"
-		var tdtempbool string = "<tr><td>%s</td><td>%t</td></tr>"
-		var tdtempint string = "<tr><td>%s</td><td>%d</td></tr>"
-		var tdtempfloat string = "<tr><td>%s</td><td>%f</td></tr>"
-		rows = append(rows, fmt.Sprintf(tdtemp, "final class", paragraph.Class))
-		rows = append(rows, fmt.Sprintf(tdtemp, "context-free class", paragraph.CfClass))
-		rows = append(rows, fmt.Sprintf(tdtempbool, "heading", paragraph.Heading))
-		rows = append(rows, fmt.Sprintf(tdtempint, "length (in characters)", len(paragraph.Text)))
-		rows = append(rows, fmt.Sprintf(tdtempint, "number of characters with links", paragraph.LinkedCharCount))
-		rows = append(rows, fmt.Sprintf(tdtempfloat, "link density", paragraph.LinkDensity))
-		rows = append(rows, fmt.Sprintf(tdtempint, "number of words", paragraph.WordCount))
-		rows = append(rows, fmt.Sprintf(tdtempint, "number of stop words", paragraph.StopwordCount))
-		rows = append(rows, fmt.Sprintf(tdtempfloat, "stop word density", paragraph.StopwordDensity))
-		rows = append(rows, fmt.Sprintf("<tr><td colspan=\"2\">%s</td></tr>", paragraph.DomPath))
-
-		output = fmt.Sprintf("%s<div id=\"debug_%d\"><table>%s</table></div>", output, counter, strings.Join(rows, "\n"))
-		counter++
+		log.Println(paragraph.DomPath)
+		log.Println("\tfinal class: ", paragraph.Class)
+		log.Println("\tcontext-free class: ", paragraph.CfClass)
+		log.Println("\theading: ", paragraph.Heading)
+		log.Println("\tlength (in characters): ", len(paragraph.Text))
+		log.Println("\tnumber of characters with links: ", paragraph.LinkedCharCount)
+		log.Println("\tlink density: ", paragraph.LinkDensity)
+		log.Println("\tnumber of words: ", paragraph.WordCount)
+		log.Println("\tnumber of stop words: ", paragraph.StopwordCount)
+		log.Println("\tstop word density: ", paragraph.StopwordDensity)
 	}
-
-	output = fmt.Sprintf("<style>.good{background-color:green;} .bad{background-color:red;}</style><div style=\"width:500px\">%s</div>", output)
-
-	return output
 }
 
-func outputKrdwrd(paragraphs []*Paragraph) (output string) {
+/*
+func (w *Writer) outputKrdwrd(paragraphs []*Paragraph) (output string) {
 	for _, paragraph := range paragraphs {
 		var cls int
 		if paragraph.Class == "good" || paragraph.Class == "neargood" {
@@ -157,7 +139,4 @@ func outputKrdwrd(paragraphs []*Paragraph) (output string) {
 
 	return output
 }
-
-
 */
-

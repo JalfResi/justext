@@ -11,6 +11,11 @@
 		margin-right: auto;
 	}
 
+	h2
+	{
+		font-weight: 400; 
+	}
+
 	.heading    { font-weight: bold; }
 	.class_bad  { background-color: #FFDDDD; margin-right: 5px; }
 	.class_good { background-color: #CCFFCC; margin-right: 5px; }
@@ -43,7 +48,11 @@
 </style>
 <body>
 {{range .Paragraphs}}
-	<p class="class_{{.Class}}"><span class="cfclass_{{.CfClass}}{{if .Heading}} .heading{{end}}">{{.CfClass}}</span>{{TrimSpace .Text}}</p>
+	{{if .Heading}}
+	<h2 class="class_{{.Class}}"><span class="cfclass_{{.CfClass}}">{{.CfClass}}</span>{{TrimSpace .Text}}</h2>
+	{{else}}
+	<p class="class_{{.Class}}"><span class="cfclass_{{.CfClass}}">{{.CfClass}}</span>{{TrimSpace .Text}}</p>
+	{{end}}
 {{end}}
 </body>
 </html>

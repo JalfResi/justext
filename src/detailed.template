@@ -1,17 +1,49 @@
 <html>
 <style>
-	.heading    { font-weight: bold; }
-	.class_good { background-color: #CCFFCC; }
-	.class_bad  { background-color: #FFDDDD; }
+	@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,300&subset=latin,cyrillic-ext,cyrillic,greek-ext,vietnamese,latin-ext);
+	
+	body
+	{
+		font-family: 'Open Sans', sans-serif;
+		font-weight: 300; 
+		width: 800px;
+		margin-left: auto;
+		margin-right: auto;
+	}
 
-	.cfclass_bad:before      { content: "Bad> "; }
-	.cfclass_short:before    { content: "Short> "; }
-	.cfclass_neargood:before { content: "NearGood> "; }
-	.cfclass_good:before     { content: "Good> "; }
+	.heading    { font-weight: bold; }
+	.class_bad  { background-color: #FFDDDD; margin-right: 5px; }
+	.class_good { background-color: #CCFFCC; margin-right: 5px; }
+
+	.class_bad .cfclass_neargood,
+	.class_bad .cfclass_short,
+	.class_bad .cfclass_good,
+	.class_bad .cfclass_bad       
+	{ 
+		display: inline-block;
+		font-weight: 400; 
+		background-color: #FF7777;
+		text-transform: uppercase;
+		margin-right: 5px;
+		margin-left: 5px;
+	}
+	
+	.class_good .cfclass_neargood,
+	.class_good .cfclass_short,
+	.class_good .cfclass_good,
+	.class_good .cfclass_bad       
+	{ 
+		display: inline-block;
+		font-weight: 400; 
+		background-color: #66FF66; 
+		text-transform: uppercase;
+		margin-right: 5px;
+		margin-left: 5px;
+	}
 </style>
 <body>
 {{range .Paragraphs}}
-	<p class="class_{{.Class}} cfclass_{{.CfClass}}{{if .Heading}} .heading{{end}}">{{TrimSpace .Text}}</p>
+	<p class="class_{{.Class}}"><span class="cfclass_{{.CfClass}}{{if .Heading}} .heading{{end}}">{{.CfClass}}</span>{{TrimSpace .Text}}</p>
 {{end}}
 </body>
 </html>

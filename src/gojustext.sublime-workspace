@@ -3,10 +3,107 @@
 	{
 		"selected_items":
 		[
+			[
+				"F",
+				"FuncMap"
+			],
+			[
+				"W",
+				"WriteString"
+			],
+			[
+				"R",
+				"ReadAll"
+			],
+			[
+				"io",
+				"ioutil"
+			],
+			[
+				"jus",
+				"jusText"
+			],
+			[
+				"max",
+				"maxHeadingDistance"
+			],
+			[
+				"stop",
+				"stopwordsHigh"
+			],
+			[
+				"leng",
+				"lengthHigh"
+			]
 		]
 	},
 	"buffers":
 	[
+		{
+			"file": "reader.go",
+			"settings":
+			{
+				"buffer_size": 1726,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "writer.go",
+			"settings":
+			{
+				"buffer_size": 3966,
+				"line_ending": "Unix",
+				"name": "package gojustext"
+			}
+		},
+		{
+			"file": "reviseParagraphClassification.go",
+			"settings":
+			{
+				"buffer_size": 3083,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "Makefile",
+			"settings":
+			{
+				"buffer_size": 746,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "example/main.go",
+			"settings":
+			{
+				"buffer_size": 453,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "stoplists.go",
+			"settings":
+			{
+				"buffer_size": 3794,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "paragraphObjectModel.go",
+			"settings":
+			{
+				"buffer_size": 3358,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "htmlRenderer.go",
+			"settings":
+			{
+				"buffer_size": 1206,
+				"line_ending": "Unix"
+			}
+		}
 	],
 	"build_system": "Packages/User/GoMake.sublime-build",
 	"command_palette":
@@ -48,6 +145,13 @@
 	},
 	"file_history":
 	[
+		"/Users/bendavies/Projects/gojustext/src/output.go",
+		"/Users/bendavies/Projects/gojustext/src/detailed.template",
+		"/Users/bendavies/Projects/gojustext/src/default.tmpl",
+		"/Users/bendavies/Projects/gojustext/src/main.go",
+		"/Users/bendavies/Projects/gojustext/src/stoplists.go",
+		"/Users/bendavies/Projects/gojustext/src/paragraphObjectModel.go",
+		"/Users/bendavies/Projects/gojustext/src/main.go_old",
 		"/Users/bendavies/Projects/nuseagent/src/Makefile",
 		"/Users/bendavies/Projects/nuseagent/src/config/Mapper.go",
 		"/Users/bendavies/Projects/nuseagent/src/config/Config.go",
@@ -165,6 +269,7 @@
 		"case_sensitive": true,
 		"find_history":
 		[
+			"log",
 			"=\"1\"",
 			"javascriptDir",
 			"templatesDir",
@@ -205,6 +310,222 @@
 		{
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "reader.go",
+					"settings":
+					{
+						"buffer_size": 1726,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								759,
+								759
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Go/Go.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 338.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "writer.go",
+					"settings":
+					{
+						"buffer_size": 3966,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3964,
+								3964
+							]
+						],
+						"settings":
+						{
+							"auto_name": "package gojustext",
+							"syntax": "Packages/Go/Go.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "reviseParagraphClassification.go",
+					"settings":
+					{
+						"buffer_size": 3083,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								19,
+								19
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Go/Go.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "Makefile",
+					"settings":
+					{
+						"buffer_size": 746,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								193,
+								193
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Makefile/Makefile.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "example/main.go",
+					"settings":
+					{
+						"buffer_size": 453,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								383,
+								383
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Go/Go.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "stoplists.go",
+					"settings":
+					{
+						"buffer_size": 3794,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3272,
+								3272
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Go/Go.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "paragraphObjectModel.go",
+					"settings":
+					{
+						"buffer_size": 3358,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1027,
+								1027
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Go/Go.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 327.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "htmlRenderer.go",
+					"settings":
+					{
+						"buffer_size": 1206,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								116,
+								116
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Go/Go.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
 			]
 		}
 	],

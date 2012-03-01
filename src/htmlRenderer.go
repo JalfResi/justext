@@ -6,7 +6,7 @@ import (
 )
 
 /**
- This should be a separte package!
+ This should be a separate package!
  And it should be a Writer!
  */
 

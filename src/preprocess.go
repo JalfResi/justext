@@ -29,6 +29,8 @@ func nodeIter(n *html.Node, f nodeIterator) {
 	}
 }
 
+// Bug in here!
+// Swaps the order of some elements!
 func addKwTags(root *html.Node) {
 	var blankText *regexp.Regexp = regexp.MustCompile("^[\n\r\t ]*$")
 	var nodesWithText []*html.Node
@@ -53,8 +55,7 @@ func addKwTags(root *html.Node) {
 				Data: "kw",
 			}
 			kw.Child = append(kw.Child, node)
-			node.Parent.Add(kw)
-			node.Parent.Remove(node)
+			replaceNode(node, kw)
 		}
 	}
 }
@@ -74,5 +75,16 @@ func removeElements(root *html.Node, elementsToRemove []string) {
 
 	for _, node := range toBeRemoved {
 		node.Parent.Remove(node)
+	}
+}
+
+// replaceNode replaces a Node in a Node tree with a replacement Node.
+func replaceNode(originalNode *html.Node, newNode *html.Node) {
+	slice := originalNode.Parent.Child
+	for position, n := range slice {
+		if n == originalNode {
+			slice = append(slice[:position], append([]*html.Node{newNode}, slice[position:]...)...)
+			return
+		}
 	}
 }

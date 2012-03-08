@@ -23,6 +23,7 @@ var selfClosingTags = map[string] bool {
 }
 
 // nodesToString loops over a node tree and generate HTML string
+// Should be moved into html/utils package
 func nodesToString(node *html.Node) string {
 	var response string = ""
 	switch node.Type {

@@ -79,6 +79,7 @@ func removeElements(root *html.Node, elementsToRemove []string) {
 }
 
 // replaceNode replaces a Node in a Node tree with a replacement Node.
+// Should be moved into html/utils package
 func replaceNode(originalNode *html.Node, newNode *html.Node) {
 	slice := originalNode.Parent.Child
 	for position, n := range slice {

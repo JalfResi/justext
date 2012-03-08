@@ -88,11 +88,12 @@ func (w *Writer) outputDetailed(paragraphs []*Paragraph) os.Error {
 	if err != nil {
 		log.Fatal(err)
 	}
-
+	
 	t := template.New("detailed")
 	t.Funcs(template.FuncMap{"TrimSpace": strings.TrimSpace})
 	
 	templ, err := t.Parse(string(templateData))
+	//templ, err := t.ParseFile("/Users/bendavies/Projects/gojustext/src/detailed.template")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -118,6 +119,15 @@ func (w *Writer) OutputDebug(paragraphs []*Paragraph) {
 		log.Println("\tstop word density: ", paragraph.StopwordDensity)
 	}
 }
+
+// TO-DO:
+// Need an output feature that returns a de-duped space separated text file of all the 
+// words in the output document sans-boilerplate. Also needs option to exclude stoplist
+// words from that output too.
+
+// TO-DO:
+// Need an output feature that returns the content of a stop list (or do we just make 
+// the function getStoplist public? Might be a lot easier...)
 
 /*
 func (w *Writer) outputKrdwrd(paragraphs []*Paragraph) (output string) {

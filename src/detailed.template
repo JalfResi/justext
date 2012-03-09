@@ -168,7 +168,7 @@
 <body>
 	<div id="toggleBoilerplate" class="eyeclosed" onclick="toggle_boilerplate_button()"></div>
 {{range $index, $p := .Paragraphs}}
-	<p class="{{if .Heading}}heading{{end}} {{.Class}}" onmouseover="show_paragraph_details(this, 'pd{{$index}}');" onmouseout="hide_paragraph_details(this, 'pd{{$index}}');">{{TrimSpace .Text}}</p>
+	<p class="{{if .Heading}}heading{{end}} {{.Class}}" onmouseover="show_paragraph_details(this, 'pd{{$index}}');" onmouseout="hide_paragraph_details(this, 'pd{{$index}}');">{{TrimSpace .Text | html}}</p>
 	<div id="pd{{$index}}" class="paragraph_details {{if .Heading}}heading{{end}} {{.Class}}" style="display:none;">	
 		<table>
 			<tr>
@@ -181,7 +181,7 @@
 				<td>Heading: </td><td>{{.Heading}}</td>
 			</tr>
 			<tr>
-				<td>Length (in characters): </td><td>len .Text</td>
+				<td>Length (in characters): </td><td>{{len .Text}}</td>
 			</tr>
 			<tr>
 				<td>Number of characters with links: </td><td>{{.LinkedCharCount}}</td>

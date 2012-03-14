@@ -6,6 +6,9 @@ import(
 	"log"
 	"os"
 	"utf8"
+	"html"
+	"fmt"
+	"strings"
 )
 
 type Reader struct {
@@ -46,11 +49,21 @@ func (r *Reader) ReadAll() ([]*Paragraph, os.Error) {
 	}
 
 	root := preprocess(utf8.NewString(string(in)).String(), "utf-8", "utf-8", "errors")
-	p, err := paragraphObjectModel(nodesToString(root))
+	if root == nil {
+		log.Fatal("Preprocess has resulted in nil")
+	}
+
+	htmlSource := nodesToString(root)
+	if len(htmlSource) == 0 {
+		log.Fatal("MAIN: perprocess has returned an empty string")
+	}
+
+	p, err := paragraphObjectModel(htmlSource)
 	if err != nil {
 		return nil, err
 	}
 	if p == nil {
+		log.Println(htmlSource)
 		log.Fatal("MAIN: P is nil", err)
 	}
 
@@ -67,4 +80,34 @@ func (r *Reader) ReadAll() ([]*Paragraph, os.Error) {
 	// e.g. io.Copy(writer, reader)
 
 	return p, nil	
+}
+
+func dumpNodes(n *html.Node, tab int, exploreChildNodes bool) string {
+	var childNodes string = ""
+	if exploreChildNodes == true {
+		if len(n.Child)>0 {
+			for _, c := range n.Child {
+				childNodes = fmt.Sprintf("%s%s\n", childNodes, dumpNodes(c, tab+1, true))
+			}
+		}
+	}
+
+	var t string
+	switch(n.Type) {
+	case html.ErrorNode:
+		t = "Error"
+	case html.TextNode:
+		t = "Text"
+	case html.DocumentNode:
+		t = "Document"
+	case html.ElementNode:
+		t = "Element"
+	case html.CommentNode:
+		t = "Comment"
+	case html.DoctypeNode:
+		t = "Doctype"
+	}
+
+	tabStr := strings.Repeat(" ", tab)
+	return fmt.Sprintf("%sType: %s\n%sData: %s\n%s", tabStr, t, tabStr, n.Data, childNodes)
 }

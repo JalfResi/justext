@@ -8,7 +8,7 @@ import (
 )
 
 func preprocess(htmlStr, encoding, defaultEncoding, encErrors string) *html.Node {
-	
+
 	root, err := html.Parse(strings.NewReader(htmlStr))
 	if err != nil {
 		log.Fatal(err)
@@ -29,9 +29,7 @@ func nodeIter(n *html.Node, f nodeIterator) {
 	}
 }
 
-// Bug in here!
-// Swaps the order of some elements!
-func addKwTags(root *html.Node) {
+func addKwTags(root *html.Node) *html.Node {
 	var blankText *regexp.Regexp = regexp.MustCompile("^[\n\r\t ]*$")
 	var nodesWithText []*html.Node
 
@@ -58,6 +56,8 @@ func addKwTags(root *html.Node) {
 			replaceNode(node, kw)
 		}
 	}
+
+	return root
 }
 
 func removeElements(root *html.Node, elementsToRemove []string) {

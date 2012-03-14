@@ -95,10 +95,8 @@ func paragraphObjectModel(htmlStr string) ([]*Paragraph, os.Error) {
 			}
 			if matchToDoErrors.MatchString(z.Error().String()) {
 				log.Println("ToDo Error")
-				log.Fatal(z.Error())
-					
+				log.Fatal(z.Error())		
 			}
-			log.Println("Other error")
 			continue
 		
 		case html.StartTagToken:

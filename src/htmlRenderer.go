@@ -3,6 +3,8 @@ package gojustext
 import (
 	"fmt"
 	"html"
+	"log"
+	"strings"
 )
 
 /**
@@ -26,11 +28,12 @@ var selfClosingTags = map[string] bool {
 // Should be moved into html/utils package
 func nodesToString(node *html.Node) string {
 	var response string = ""
+
 	switch node.Type {
 		case html.TextNode:
-			response = fmt.Sprintf("%s", html.EscapeString(node.Data))
+			response = fmt.Sprintf("%s", html.EscapeString(strings.TrimSpace(node.Data)))
 
-		case html.ElementNode:
+		case html.ElementNode, html.DoctypeNode:
 			var att string = ""
 			if len(node.Attr)>0 {
 				for _, a := range node.Attr {
@@ -42,7 +45,7 @@ func nodesToString(node *html.Node) string {
 				return fmt.Sprintf("<%s%s>", node.Data, att)
 			}
 
-			var content string
+			var content string = ""
 			if len(node.Child)>0 {
 				for _, n := range node.Child {
 					content = fmt.Sprintf("%s%s", content, nodesToString(n))
@@ -56,6 +59,27 @@ func nodesToString(node *html.Node) string {
 					response = nodesToString(n)
 				}
 			}
+
+		default:
+			log.Printf("Unhandled node: %s\n", nodeTypeToString(node))
 	}
 	return response
+}
+
+func nodeTypeToString(n *html.Node) (t string){
+	switch(n.Type) {
+	case html.ErrorNode:
+		t = "Error"
+	case html.TextNode:
+		t = "Text"
+	case html.DocumentNode:
+		t = "Document"
+	case html.ElementNode:
+		t = "Element"
+	case html.CommentNode:
+		t = "Comment"
+	case html.DoctypeNode:
+		t = "Doctype"
+	}
+	return t
 }

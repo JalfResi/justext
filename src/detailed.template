@@ -6,9 +6,9 @@
 	{
 		font-family: 'Open Sans', sans-serif;
 		font-weight: 300; 
-		width: 800px;
 		margin-left: auto;
 		margin-right: auto;
+		width: 800px;
 	}
 
 	p.good, p.heading, p.bad {
@@ -71,6 +71,7 @@
 	{
 		float: left;
 		margin-left: -100;
+		margin-top: 3px;
 		display: block;
 		width: 31px;
 		height: 24px;
@@ -168,7 +169,6 @@
 <body>
 	<div id="toggleBoilerplate" class="eyeclosed" onclick="toggle_boilerplate_button()"></div>
 {{range $index, $p := .Paragraphs}}
-	<p class="{{if .Heading}}heading{{end}} {{.Class}}" onmouseover="show_paragraph_details(this, 'pd{{$index}}');" onmouseout="hide_paragraph_details(this, 'pd{{$index}}');">{{TrimSpace .Text | html}}</p>
 	<div id="pd{{$index}}" class="paragraph_details {{if .Heading}}heading{{end}} {{.Class}}" style="display:none;">	
 		<table>
 			<tr>
@@ -203,6 +203,7 @@
 			</tr>
 		</table>
 	</div>	
+	<p class="{{if .Heading}}heading{{end}} {{.Class}}" onmouseover="show_paragraph_details(this, 'pd{{$index}}');" onmouseout="hide_paragraph_details(this, 'pd{{$index}}');">{{TrimSpace .Text | html}}</p>
 {{end}}
 </body>
 </html>

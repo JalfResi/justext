@@ -52,8 +52,10 @@ func addKwTags(root *html.Node) *html.Node {
 				Type: html.ElementNode,
 				Data: "kw",
 			}
-			kw.Child = append(kw.Child, node)
-			replaceNode(node, kw)
+			node2 := CopyNode(node, true)
+			kw.Child = append(kw.Child, node2)
+			insertNode(node, kw)
+			node.Parent.Remove(node)
 		}
 	}
 
@@ -78,14 +80,33 @@ func removeElements(root *html.Node, elementsToRemove []string) {
 	}
 }
 
-// replaceNode replaces a Node in a Node tree with a replacement Node.
+// insertsNode inserts a Node in a Node tree at the position of another node.
 // Should be moved into html/utils package
-func replaceNode(originalNode *html.Node, newNode *html.Node) {
+func insertNode(originalNode *html.Node, newNode *html.Node) {
 	slice := originalNode.Parent.Child
 	for position, n := range slice {
 		if n == originalNode {
-			slice = append(slice[:position], append([]*html.Node{newNode}, slice[position:]...)...)
+			originalNode.Parent.Child = append(slice[:position], append([]*html.Node{newNode}, slice[position:]...)...)
 			return
 		}
 	}
+}
+
+func CopyNode(node *html.Node, deep bool) *html.Node {
+	newNode := &html.Node{
+		Type: node.Type,
+		Data: node.Data,
+	}
+
+	if deep && len(node.Child)>0 {
+		for _, n := range node.Child {
+			newNode.Child = append(newNode.Child, CopyNode(n, true))
+		}
+	}
+
+	for _, i := range node.Attr {
+		newNode.Attr = append(newNode.Attr, html.Attribute{Key:i.Key, Val:i.Val})
+	}
+
+	return newNode
 }

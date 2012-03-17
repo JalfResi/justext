@@ -95,19 +95,19 @@ func dumpNodes(n *html.Node, tab int, exploreChildNodes bool) string {
 	var t string
 	switch(n.Type) {
 	case html.ErrorNode:
-		t = "Error"
+		t = "Err"
 	case html.TextNode:
-		t = "Text"
+		t = "T"
 	case html.DocumentNode:
-		t = "Document"
+		t = "D"
 	case html.ElementNode:
-		t = "Element"
+		t = "E"
 	case html.CommentNode:
-		t = "Comment"
+		t = "C"
 	case html.DoctypeNode:
-		t = "Doctype"
+		t = "Dt"
 	}
 
 	tabStr := strings.Repeat(" ", tab)
-	return fmt.Sprintf("%sType: %s\n%sData: %s\n%s", tabStr, t, tabStr, n.Data, childNodes)
+	return fmt.Sprintf("%s%s:%s\n%s", tabStr, t, strings.TrimSpace(strings.Replace(n.Data, "\n", "", -1)), childNodes)
 }

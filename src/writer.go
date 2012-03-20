@@ -1,6 +1,7 @@
 package gojustext
 
 import(
+	"fmt"
 	"log"
 	"io"
 	"os"
@@ -21,6 +22,7 @@ const(
 type Writer struct {
 	Mode          int
 	NoBoilerplate bool
+	Stoplist      map[string]bool
 	w             io.Writer
 }
 
@@ -82,6 +84,25 @@ func (w *Writer) outputDefault(paragraphs []*Paragraph) os.Error {
 
 	return templ.Execute(w.w, data)
 }
+/*
+func MarkStopwords(args ...interface{}) string {
+	if len(args) == 0 {
+		return ""
+	}
+
+	var output string = ""
+	words := strings.Split(args[0], " ")
+	for _, word := range words {
+		if w.Stoplist[word] {
+			output = fmt.Sprintf("%s<span class=\"stopword\">%s</span> ", output, word)
+		} else {
+			output = fmt.Sprintf("%s%s ", output, word)
+		}
+	}
+
+	return output
+}
+*/
 
 func (w *Writer) outputDetailed(paragraphs []*Paragraph) os.Error {
 	templateData, err := DetailedTemplate()
@@ -89,8 +110,27 @@ func (w *Writer) outputDetailed(paragraphs []*Paragraph) os.Error {
 		log.Fatal(err)
 	}
 	
+
+	var markStopwords func(args ...interface{}) string
+	markStopwords = func(args ...interface{}) string {
+
+		var output string = ""
+		words := strings.Split(args[0].(string), " ")
+		for _, word := range words {
+			log.Printf("%s %t\n", strings.TrimSpace(word), w.Stoplist[strings.TrimSpace(word)])
+			if w.Stoplist[strings.TrimSpace(word)] {
+				output = fmt.Sprintf("%s<span class=\"stopword\">%s</span> ", output, word)
+			} else {
+				output = fmt.Sprintf("%s%s ", output, word)
+			}
+		}
+		
+		return output
+	}
+
 	t := template.New("detailed")
 	t.Funcs(template.FuncMap{"TrimSpace": strings.TrimSpace})
+	t.Funcs(template.FuncMap{"MarkStopwords": markStopwords})
 	
 	templ, err := t.Parse(string(templateData))
 	//templ, err := t.ParseFile("/Users/bendavies/Projects/gojustext/src/detailed.template")

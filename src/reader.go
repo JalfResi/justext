@@ -14,7 +14,7 @@ import(
 type Reader struct {
 	LengthLow          int
 	LengthHigh         int
-	StoplistLanguage   string
+	Stoplist           map[string]bool
 	StopwordsLow       float64
 	StopwordsHigh      float64
 	MaxLinkDensity     float64
@@ -27,7 +27,6 @@ func NewReader(r io.Reader) *Reader {
 	return &Reader{
 		LengthLow:          70,
 		LengthHigh:         200,
-		StoplistLanguage:   "English",
 		StopwordsLow:       0.30,
 		StopwordsHigh:      0.32,
 		MaxLinkDensity:     0.2,
@@ -39,11 +38,6 @@ func NewReader(r io.Reader) *Reader {
 
 func (r *Reader) ReadAll() ([]*Paragraph, os.Error) {
 	in, err := ioutil.ReadAll(r.r)
-	if err != nil {
-		return nil, err
-	}
-
-	stoplist, err := getStoplist(r.StoplistLanguage)
 	if err != nil {
 		return nil, err
 	}
@@ -67,7 +61,7 @@ func (r *Reader) ReadAll() ([]*Paragraph, os.Error) {
 		log.Fatal("MAIN: P is nil", err)
 	}
 
-	classifyParagraphs(p, stoplist, r.LengthLow, r.LengthHigh, r.StopwordsLow, r.StopwordsHigh, r.MaxLinkDensity, r.NoHeadings)
+	classifyParagraphs(p, r.Stoplist, r.LengthLow, r.LengthHigh, r.StopwordsLow, r.StopwordsHigh, r.MaxLinkDensity, r.NoHeadings)
 	reviseParagraphClassification(p, r.MaxHeadingDistance)
 
 	// NOTE: Might be best if this reader returned []paragraphs

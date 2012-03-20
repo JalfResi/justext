@@ -113,7 +113,7 @@ var stoplists = map[string]ResourceFunc {
 	"Yoruba": YorubaStoplist,
 }
 
-func getStoplist(language string) (map[string]bool, os.Error) {
+func GetStoplist(language string) (map[string]bool, os.Error) {
 	if _, ok := stoplists[language]; !ok {
 		return nil, os.NewError(fmt.Sprintf("Language %s not supported", language))
 	}

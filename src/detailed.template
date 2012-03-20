@@ -11,6 +11,10 @@
 		width: 800px;
 	}
 
+	span.stopword {
+		text-decoration: underline;
+	}
+
 	p.good, p.heading, p.bad {
 	    width: 550px;
 	    text-align: justify;
@@ -203,7 +207,7 @@
 			</tr>
 		</table>
 	</div>	
-	<p class="{{if .Heading}}heading{{end}} {{.Class}}" onmouseover="show_paragraph_details(this, 'pd{{$index}}');" onmouseout="hide_paragraph_details(this, 'pd{{$index}}');">{{TrimSpace .Text | html}}</p>
+	<p class="{{if .Heading}}heading{{end}} {{.Class}}" onmouseover="show_paragraph_details(this, 'pd{{$index}}');" onmouseout="hide_paragraph_details(this, 'pd{{$index}}');">{{TrimSpace .Text | MarkStopwords}}</p>
 {{end}}
 </body>
 </html>

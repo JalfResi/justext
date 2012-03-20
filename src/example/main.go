@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"flag"
 	"log"
 	"os"
@@ -23,11 +24,21 @@ var(
 func main() {
 	flag.Parse()
 
+	stoplist, err := gojustext.GetStoplist(*stoplistLanguage)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	for k, _ := range stoplist {
+		fmt.Println(k)
+	}
+	log.Fatal("")
+
 	jusText := gojustext.NewReader(os.Stdin)
 
 	jusText.LengthLow          = *lengthLow
 	jusText.LengthHigh         = *lengthHigh
-	jusText.StoplistLanguage   = *stoplistLanguage		
+	jusText.Stoplist           = stoplist
 	jusText.StopwordsLow       = *stopwordsLow
 	jusText.StopwordsHigh      = *stopwordsHigh
 	jusText.MaxLinkDensity     = *maxLinkDensity	
@@ -40,6 +51,8 @@ func main() {
 	}
 
 	j := gojustext.NewWriter(os.Stdout)
+	j.Stoplist = stoplist
+
 	if *outputMode {
 		j.Mode = gojustext.MODE_DETAILED
 	}

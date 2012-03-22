@@ -2,10 +2,8 @@ package gojustext
 
 import(
 	"bytes"
-	"csv"
 	"log"
 	"os"
-	"fmt"
 )
 
 type ResourceFunc func() ([]byte, os.Error)
@@ -122,19 +120,12 @@ func GetStoplist(language string) (map[string]bool, os.Error) {
 	if err != nil {
 		log.Fatal(err)
 	}
-
-	r := csv.NewReader(bytes.NewBuffer(data));
-	r.LazyQuotes = true
-	
-	result, err := r.ReadAll()
-	if err != nil {
-		log.Fatal(err)
-	}
+	db := bytes.Split(data, []uint8("\n"))
 
 	// Convert to map
 	var list = make(map[string]bool)
-	for _, fields := range result {
-		list[fields[0]] = true
+	for _, val := range db {
+		list[string(val)] = true
 	}
 
 	return list, nil

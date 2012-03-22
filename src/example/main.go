@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"flag"
 	"log"
 	"os"
@@ -28,11 +27,6 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-
-	for k, _ := range stoplist {
-		fmt.Println(k)
-	}
-	log.Fatal("")
 
 	jusText := gojustext.NewReader(os.Stdin)
 

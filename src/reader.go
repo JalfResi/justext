@@ -64,15 +64,6 @@ func (r *Reader) ReadAll() ([]*Paragraph, os.Error) {
 	classifyParagraphs(p, r.Stoplist, r.LengthLow, r.LengthHigh, r.StopwordsLow, r.StopwordsHigh, r.MaxLinkDensity, r.NoHeadings)
 	reviseParagraphClassification(p, r.MaxHeadingDistance)
 
-	// NOTE: Might be best if this reader returned []paragraphs
-	// We can then have a Writer that takes []paragraphs and outputs it as HTML.
-	// The Writer could then have an option specifying detailed out, etc;
-	// and the Reader would be responsible for classification, the Writer
-	// for parsing the []paragraphs for output.
-	//
-	// The example app would then simply use copy to push the stdin to stdout
-	// e.g. io.Copy(writer, reader)
-
 	return p, nil	
 }
 

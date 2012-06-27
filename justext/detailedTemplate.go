@@ -1,4 +1,4 @@
-package gojustext
+package justext
 import ( "io"; "os"; "bytes"; "compress/gzip" )
 
 func DetailedTemplate() ([]byte, os.Error) {

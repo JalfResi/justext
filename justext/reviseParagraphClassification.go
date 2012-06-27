@@ -1,4 +1,4 @@
-package gojustext
+package justext
 
 // Context-sensitive paragraph classification. Assumes that classify_pragraphs has already been called.
 func reviseParagraphClassification(paragraphs []*Paragraph, maxHeadingDistance int) {

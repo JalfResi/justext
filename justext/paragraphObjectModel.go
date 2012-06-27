@@ -1,4 +1,4 @@
-package gojustext
+package justext
 
 import (
 	"html"

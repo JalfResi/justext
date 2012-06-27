@@ -1,14 +1,13 @@
 package justext
 
-import(
+import (
+	"fmt"
+	"html"
 	"io"
 	"io/ioutil"
 	"log"
-	"os"
-	"utf8"
-	"html"
-	"fmt"
 	"strings"
+	"unicode/utf8"
 )
 
 type Reader struct {
@@ -31,12 +30,12 @@ func NewReader(r io.Reader) *Reader {
 		StopwordsHigh:      0.32,
 		MaxLinkDensity:     0.2,
 		MaxHeadingDistance: 200,
-		NoHeadings:         false,	
+		NoHeadings:         false,
 		r:                  r,
 	}
 }
 
-func (r *Reader) ReadAll() ([]*Paragraph, os.Error) {
+func (r *Reader) ReadAll() ([]*Paragraph, error) {
 	in, err := ioutil.ReadAll(r.r)
 	if err != nil {
 		return nil, err
@@ -64,13 +63,13 @@ func (r *Reader) ReadAll() ([]*Paragraph, os.Error) {
 	classifyParagraphs(p, r.Stoplist, r.LengthLow, r.LengthHigh, r.StopwordsLow, r.StopwordsHigh, r.MaxLinkDensity, r.NoHeadings)
 	reviseParagraphClassification(p, r.MaxHeadingDistance)
 
-	return p, nil	
+	return p, nil
 }
 
 func dumpNodes(n *html.Node, tab int, exploreChildNodes bool) string {
 	var childNodes string = ""
 	if exploreChildNodes == true {
-		if len(n.Child)>0 {
+		if len(n.Child) > 0 {
 			for _, c := range n.Child {
 				childNodes = fmt.Sprintf("%s%s\n", childNodes, dumpNodes(c, tab+1, true))
 			}
@@ -78,7 +77,7 @@ func dumpNodes(n *html.Node, tab int, exploreChildNodes bool) string {
 	}
 
 	var t string
-	switch(n.Type) {
+	switch n.Type {
 	case html.ErrorNode:
 		t = "Err"
 	case html.TextNode:

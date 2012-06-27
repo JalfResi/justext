@@ -2,69 +2,69 @@ package justext
 
 import (
 	"html"
+	"io"
 	"log"
-	"os"
 	"regexp"
 	"strings"
 )
 
 var (
-	paragraphTags = map[string] bool { 
-		"blockquote": true, 
-		"caption": true, 
-		"center": true, 
-		"col": true, 
-		"colgroup": true, 
-		"dd": true,
-	    "div": true, 
-	    "dl": true, 
-	    "dt": true, 
-	    "fieldset": true, 
-	    "form": true, 
-	    "legend": true, 
-	    "optgroup": true, 
-	    "option": true,
-	    "p": true, 
-	    "pre": true, 
-	    "table": true, 
-	    "td": true, 
-	    "textarea": true, 
-	    "tfoot": true, 
-	    "th": true, 
-	    "thead": true, 
-	    "tr": true,
-	    "ul": true, 
-	    "li": true, 
-	    "h1": true, 
-	    "h2": true, 
-	    "h3": true, 
-	    "h4": true, 
-	    "h5": true, 
-	    "h6": true,
+	paragraphTags = map[string]bool{
+		"blockquote": true,
+		"caption":    true,
+		"center":     true,
+		"col":        true,
+		"colgroup":   true,
+		"dd":         true,
+		"div":        true,
+		"dl":         true,
+		"dt":         true,
+		"fieldset":   true,
+		"form":       true,
+		"legend":     true,
+		"optgroup":   true,
+		"option":     true,
+		"p":          true,
+		"pre":        true,
+		"table":      true,
+		"td":         true,
+		"textarea":   true,
+		"tfoot":      true,
+		"th":         true,
+		"thead":      true,
+		"tr":         true,
+		"ul":         true,
+		"li":         true,
+		"h1":         true,
+		"h2":         true,
+		"h3":         true,
+		"h4":         true,
+		"h5":         true,
+		"h6":         true,
 	}
 	matchWhiteSpace *regexp.Regexp = regexp.MustCompile("[\n\r\t]+")
 )
 
 type Paragraph struct {
-	DomPath string
-	TextNodes []string
-	WordCount int
+	DomPath         string
+	TextNodes       []string
+	WordCount       int
 	LinkedCharCount int
-	TagCount int
-	Text string
-	StopwordCount int
+	TagCount        int
+	Text            string
+	StopwordCount   int
 	StopwordDensity float64
-	LinkDensity float64
-	Heading bool
-	CfClass string
-	Class string
+	LinkDensity     float64
+	Heading         bool
+	CfClass         string
+	Class           string
 }
 
-func paragraphObjectModel(htmlStr string) ([]*Paragraph, os.Error) {
-	
+func paragraphObjectModel(htmlStr string) ([]*Paragraph, error) {
+
 	var dom []string
 	var paragraphs []*Paragraph
-	var paragraph *Paragraph = &Paragraph{WordCount:0, LinkedCharCount: 0, TagCount: 0}
+	var paragraph *Paragraph = &Paragraph{WordCount: 0, LinkedCharCount: 0, TagCount: 0}
 	var link bool = false
 	var br bool = false
 	var matchToDoErrors *regexp.Regexp = regexp.MustCompile("^html: TODO: ")
@@ -76,29 +76,29 @@ func paragraphObjectModel(htmlStr string) ([]*Paragraph, os.Error) {
 			paragraphs = append(paragraphs, paragraph)
 		}
 		paragraph = &Paragraph{
-			DomPath: strings.Join(dom, "."), 
-			WordCount:0, 
-			LinkedCharCount: 0, 
-			TagCount: 0,
+			DomPath:         strings.Join(dom, "."),
+			WordCount:       0,
+			LinkedCharCount: 0,
+			TagCount:        0,
 		}
-	}	
+	}
 
 	z := html.NewTokenizer(strings.NewReader(htmlStr))
 
 	for {
 		tt := z.Next()
 		switch tt {
-		
+
 		case html.ErrorToken:
-			if z.Error() == os.EOF {
-				return paragraphs, nil	
+			if z.Err() == io.EOF {
+				return paragraphs, nil
 			}
-			if matchToDoErrors.MatchString(z.Error().String()) {
+			if matchToDoErrors.MatchString(z.Err().String()) {
 				log.Println("ToDo Error")
-				log.Fatal(z.Error())		
+				log.Fatal(z.Err())
 			}
 			continue
-		
+
 		case html.StartTagToken:
 			tmpName, _ := z.TagName()
 			name := string(tmpName)
@@ -126,7 +126,7 @@ func paragraphObjectModel(htmlStr string) ([]*Paragraph, os.Error) {
 			tmpName, _ := z.TagName()
 			name := string(tmpName)
 			//log.Println("Matched end tag: ", name)
-			dom = dom[0:len(dom)-1]
+			dom = dom[0 : len(dom)-1]
 			if _, ok := paragraphTags[name]; ok {
 				startNewParagraph()
 			}
@@ -137,7 +137,7 @@ func paragraphObjectModel(htmlStr string) ([]*Paragraph, os.Error) {
 		case html.TextToken:
 			text := strings.TrimSpace(string(z.Text()))
 			e := 15
-			if(len(text)<e) {
+			if len(text) < e {
 				e = len(text)
 			}
 			//log.Println("Matched text: ", text[:e], "...")

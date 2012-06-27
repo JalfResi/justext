@@ -1,20 +1,19 @@
 package justext
 
-import(
+import (
+	"errors"
 	"fmt"
-	"log"
 	"io"
-	"os"
-	"template"
+	"log"
 	"strings"
+	"text/template"
 )
 
 // NOTE:
 // Make a new type:
 //  type JusText []paragraphs
 
-
-const(
+const (
 	MODE_DEFAULT  = 1
 	MODE_DETAILED = 2
 )
@@ -34,18 +33,18 @@ func NewWriter(w io.Writer) *Writer {
 	}
 }
 
-func (w *Writer) WriteAll(paragraphs []*Paragraph) os.Error {
-	switch(w.Mode) {
-		case MODE_DEFAULT:
-			return w.outputDefault(paragraphs)
-			break
+func (w *Writer) WriteAll(paragraphs []*Paragraph) error {
+	switch w.Mode {
+	case MODE_DEFAULT:
+		return w.outputDefault(paragraphs)
+		break
 
-		case MODE_DETAILED:
-			return w.outputDetailed(paragraphs)
-			break
+	case MODE_DETAILED:
+		return w.outputDetailed(paragraphs)
+		break
 
-		default:
-			return os.NewError("Unrecognised mode")
+	default:
+		return errors.New("Unrecognised mode")
 	}
 
 	return nil
@@ -62,7 +61,7 @@ func IsGood(args ...interface{}) (result bool) {
 	return
 }
 
-func (w *Writer) outputDefault(paragraphs []*Paragraph) os.Error {
+func (w *Writer) outputDefault(paragraphs []*Paragraph) error {
 	templateData, err := DefaultTemplate()
 	if err != nil {
 		log.Fatal(err)
@@ -78,14 +77,14 @@ func (w *Writer) outputDefault(paragraphs []*Paragraph) os.Error {
 	}
 
 	var data = struct {
-		Paragraphs []*Paragraph
+		Paragraphs    []*Paragraph
 		NoBoilerplate bool
 	}{paragraphs, w.NoBoilerplate}
 
 	return templ.Execute(w.w, data)
 }
 
-func (w *Writer) outputDetailed(paragraphs []*Paragraph) os.Error {
+func (w *Writer) outputDetailed(paragraphs []*Paragraph) error {
 	templateData, err := DetailedTemplate()
 	if err != nil {
 		log.Fatal(err)
@@ -103,14 +102,14 @@ func (w *Writer) outputDetailed(paragraphs []*Paragraph) os.Error {
 				output = fmt.Sprintf("%s%s ", output, word)
 			}
 		}
-		
+
 		return output
 	}
 
 	t := template.New("detailed")
 	t.Funcs(template.FuncMap{"TrimSpace": strings.TrimSpace})
 	t.Funcs(template.FuncMap{"MarkStopwords": markStopwords})
-	
+
 	templ, err := t.Parse(string(templateData))
 	if err != nil {
 		log.Fatal(err)

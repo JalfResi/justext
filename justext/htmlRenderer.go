@@ -2,7 +2,7 @@ package justext
 
 import (
 	"fmt"
-	"html"
+	"exp/html"
 	"log"
 	"strings"
 )

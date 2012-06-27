@@ -2,7 +2,7 @@ package justext
 
 import (
 	"fmt"
-	"html"
+	"exp/html"
 	"io"
 	"io/ioutil"
 	"log"

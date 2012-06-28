@@ -4,11 +4,19 @@ import (
 	"bytes"
 	"errors"
 	"log"
+	"fmt"
 )
 
 type ResourceFunc func() ([]byte, error)
 
-var stoplists = map[string]ResourceFunc{
+var stoplists = map[string]ResourceFunc{}
+
+func RegisterStoplist(name string, resourceFunc ResourceFunc) {
+	stoplists[name] = resourceFunc
+}
+
+/*
+{
 	"Afrikaans":               AfrikaansStoplist,
 	"Albanian":                AlbanianStoplist,
 	"Arabic":                  ArabicStoplist,
@@ -110,6 +118,7 @@ var stoplists = map[string]ResourceFunc{
 	"Western_Panjabi":         Western_PanjabiStoplist,
 	"Yoruba":                  YorubaStoplist,
 }
+*/
 
 func GetStoplist(language string) (map[string]bool, error) {
 	if _, ok := stoplists[language]; !ok {

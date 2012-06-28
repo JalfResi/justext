@@ -7,7 +7,6 @@ import (
 	"io/ioutil"
 	"log"
 	"strings"
-	"unicode/utf8"
 )
 
 type Reader struct {
@@ -41,7 +40,7 @@ func (r *Reader) ReadAll() ([]*Paragraph, error) {
 		return nil, err
 	}
 
-	root := preprocess(utf8.NewString(string(in)).String(), "utf-8", "utf-8", "errors")
+	root := preprocess(string(in), "utf-8", "utf-8", "errors")
 	if root == nil {
 		log.Fatal("Preprocess has resulted in nil")
 	}

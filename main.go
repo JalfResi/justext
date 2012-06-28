@@ -23,12 +23,12 @@ var(
 func main() {
 	flag.Parse()
 
-	stoplist, err := gojustext.GetStoplist(*stoplistLanguage)
+	stoplist, err := justext.GetStoplist(*stoplistLanguage)
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	jusText := gojustext.NewReader(os.Stdin)
+	jusText := justext.NewReader(os.Stdin)
 
 	jusText.LengthLow          = *lengthLow
 	jusText.LengthHigh         = *lengthHigh
@@ -44,11 +44,11 @@ func main() {
 		log.Fatal(err)
 	}
 
-	j := gojustext.NewWriter(os.Stdout)
+	j := justext.NewWriter(os.Stdout)
 	j.Stoplist = stoplist
 
 	if *outputMode {
-		j.Mode = gojustext.MODE_DETAILED
+		j.Mode = justext.MODE_DETAILED
 	}
 
 	if *debugMode {

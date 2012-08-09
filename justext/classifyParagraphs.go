@@ -6,7 +6,7 @@ import(
 )
 
 var findHeadings  *regexp.Regexp = regexp.MustCompile("(^h[123456]|.h[123456])")
-var copyrightChar *regexp.Regexp = regexp.MustCompile("(\xa9|&copy)")
+var copyrightChar *regexp.Regexp = regexp.MustCompile("(\u0161|&copy)")
 var findSelect    *regexp.Regexp = regexp.MustCompile("(^select|.select)")
 
 func classifyParagraphs(paragraphs []*Paragraph, stoplist map[string]bool, lengthLow int, lengthHigh int, stopwordsLow float64, stopwordsHigh float64, maxLinkDensity float64, noHeadings bool) {

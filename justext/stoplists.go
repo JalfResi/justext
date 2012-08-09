@@ -5,6 +5,7 @@ import (
 	"errors"
 	"log"
 	"fmt"
+	"io/ioutil"
 )
 
 type ResourceFunc func() ([]byte, error)
@@ -119,6 +120,23 @@ func RegisterStoplist(name string, resourceFunc ResourceFunc) {
 	"Yoruba":                  YorubaStoplist,
 }
 */
+
+func ReadStoplist(filename string) map[string]bool {
+	data, err := ioutil.ReadFile(filename)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	db := bytes.Split(data, []uint8("\n"))
+
+	// Convert to map
+	var list = make(map[string]bool)
+	for _, val := range db {
+		list[string(val)] = true
+	}
+
+	return list
+}
 
 func GetStoplist(language string) (map[string]bool, error) {
 	if _, ok := stoplists[language]; !ok {

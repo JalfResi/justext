@@ -10,6 +10,7 @@ import (
 var(
 	lengthLow  *int          = flag.Int("length-low", 70, "Sets the length low")
 	lengthHigh *int          = flag.Int("length-high", 200, "Sets the length high")
+	stoplistFilename *string = flag.String("stoplist", "", "Specifies a stoplist file")
 	stoplistLanguage *string = flag.String("language", "English", "Sets the stoplist language")
 	stopwordsLow  *float64   = flag.Float64("stopwords-low", 0.30, "Sets the stopwords low")
 	stopwordsHigh *float64   = flag.Float64("stopwords-high", 0.32, "Sets the stopwords high")
@@ -23,9 +24,16 @@ var(
 func main() {
 	flag.Parse()
 
-	stoplist, err := justext.GetStoplist(*stoplistLanguage)
-	if err != nil {
-		log.Fatal(err)
+	var stoplist map[string]bool
+
+	if *stoplistFilename != "" {
+		stoplist = justext.ReadStoplist(*stoplistFilename)
+	} else {
+		var err error
+		stoplist, err = justext.GetStoplist(*stoplistLanguage)
+		if err != nil {
+			log.Fatal(err)
+		}
 	}
 
 	jusText := justext.NewReader(os.Stdin)

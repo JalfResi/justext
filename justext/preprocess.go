@@ -1,7 +1,7 @@
 package justext
 
 import (
-	"exp/html"
+	"github.com/peterbourgon/exp-html"
 	"log"
 	"regexp"
 	"strings"

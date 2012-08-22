@@ -1,6 +1,6 @@
 <html>
 <body>
-{{$noBoilerplate = .NoBoilerplate}}
+{{$noBoilerplate := .NoBoilerplate}}
 {{range .Paragraphs}}
 	{{if IsGood .Class}}
 		{{if .Heading}}

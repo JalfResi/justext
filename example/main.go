@@ -4,7 +4,7 @@ import (
 	"flag"
 	"log"
 	"os"
-	"./justext"
+	"justext"
 )
 
 var(

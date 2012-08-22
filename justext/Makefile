@@ -28,7 +28,7 @@ stoplists/%.go:
 	go-bindata -i=stoplists/$*/data.txt -o="stoplists/$*/data.go" -f="$*Stoplist" -p="gojustext/stoplists/$*"
 
 defaultTemplate.go:
-	go-bindata -i=default.template -o="defaultTemplate.go" -f="DefaultTemplate" -p="gojustext"
+	go-bindata -i=default.template -o="../defaultTemplate.go" -f="DefaultTemplate" -p="gojustext"
 
 detailedTemplate.go:
-	go-bindata -i=detailed.template -o="detailedTemplate.go" -f="DetailedTemplate" -p="gojustext"
+	go-bindata -i=detailed.template -o="../detailedTemplate.go" -f="DetailedTemplate" -p="gojustext"

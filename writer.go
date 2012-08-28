@@ -62,7 +62,7 @@ func IsGood(args ...interface{}) (result bool) {
 }
 
 func (w *Writer) outputDefault(paragraphs []*Paragraph) error {
-	templateData, err := DefaultTemplate()
+	templateData := DefaultTemplate()
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -85,7 +85,7 @@ func (w *Writer) outputDefault(paragraphs []*Paragraph) error {
 }
 
 func (w *Writer) outputDetailed(paragraphs []*Paragraph) error {
-	templateData, err := DetailedTemplate()
+	templateData := DetailedTemplate()
 	if err != nil {
 		log.Fatal(err)
 	}

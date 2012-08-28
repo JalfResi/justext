@@ -63,10 +63,6 @@ func IsGood(args ...interface{}) (result bool) {
 
 func (w *Writer) outputDefault(paragraphs []*Paragraph) error {
 	templateData := DefaultTemplate()
-	if err != nil {
-		log.Fatal(err)
-	}
-
 	t := template.New("default")
 	t.Funcs(template.FuncMap{"TrimSpace": strings.TrimSpace})
 	t.Funcs(template.FuncMap{"IsGood": IsGood})
@@ -86,10 +82,6 @@ func (w *Writer) outputDefault(paragraphs []*Paragraph) error {
 
 func (w *Writer) outputDetailed(paragraphs []*Paragraph) error {
 	templateData := DetailedTemplate()
-	if err != nil {
-		log.Fatal(err)
-	}
-
 	var markStopwords func(args ...interface{}) string
 	markStopwords = func(args ...interface{}) string {
 

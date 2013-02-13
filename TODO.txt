@@ -1,8 +1,3 @@
 TODO
 ====
-- Make sure that we can build an executable and a package from the same directory. If not, move the executable into a sub-directory.
-- Make the two template files into proper go files with the template source embeded within as a string (removes dependance on go-bindata)
-- Tidy up and push to master
-- Documentation
-- Tests
-- Release v0.1
+- Stoplists need to be separtae subpackages (use the init() package method of registration)

@@ -3,7 +3,7 @@ gojustext
 
 A Go package that implements the JusText boilerplate removal algorithm
 
-**Install
+** Install
 
   go get github.com/JalfResi/gojustext
 

@@ -36,8 +36,7 @@ Example usage:
     reader.NoHeadings = false
     
     // Read from the reader to generate a paragraph set
-    paragraphSet, err := reader.ReadAll()
-    // Error checking omitted
+    paragraphSet, _ := reader.ReadAll()
     
     // Create a writer from another writer
     writer := justext.NewWriter(os.Stdout)

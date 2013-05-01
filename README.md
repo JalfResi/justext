@@ -17,8 +17,9 @@ Supports all stoplist files available at http://code.google.com/p/justext/source
 
 Justext expects valid HTML; it is your responsability to ensure that valid HTML is passed to Justext. To make things easier 
 I have written a CGO wrapper around libtidy which you can find here: [github.com/JalfResi/GoTidy](https://github.com/JalfResi/GoTidy)
+In the future, once exp/html is part of the standard packages I will add teh HTML parser infron of this to ensure that valid HTML is passed to JusText.
 
-Justext use the reader-writer idiom, alowing you to sewtup the reader with a common configuration and just pump out 
+Justext use the reader-writer idiom, alowing you to setup the reader with a common configuration and just pump out 
 articles to the writer.
 
 Example usage:

@@ -5,8 +5,8 @@ import (
 	"github.com/peterbourgon/exp-html"
 	"io"
 	"io/ioutil"
-	"log"
 	"strings"
+	"errors"
 )
 
 type Reader struct {
@@ -40,14 +40,17 @@ func (r *Reader) ReadAll() ([]*Paragraph, error) {
 		return nil, err
 	}
 
-	root := preprocess(string(in), "utf-8", "utf-8", "errors")
+	root, err := preprocess(string(in), "utf-8", "utf-8", "errors")
+	if err != nil {
+		return nil, err
+	}
 	if root == nil {
-		log.Fatal("Preprocess has resulted in nil")
+		return nil, errors.New("Preprocess has resulted in nil")
 	}
 
 	htmlSource := nodesToString(root)
 	if len(htmlSource) == 0 {
-		log.Fatal("MAIN: perprocess has returned an empty string")
+		return nil, errors.New("MAIN: perprocess has returned an empty string")
 	}
 
 	p, err := paragraphObjectModel(htmlSource)
@@ -55,8 +58,7 @@ func (r *Reader) ReadAll() ([]*Paragraph, error) {
 		return nil, err
 	}
 	if p == nil {
-		log.Println(htmlSource)
-		log.Fatal("MAIN: P is nil", err)
+		return nil, errors.New("MAIN: P is nil")
 	}
 
 	classifyParagraphs(p, r.Stoplist, r.LengthLow, r.LengthHigh, r.StopwordsLow, r.StopwordsHigh, r.MaxLinkDensity, r.NoHeadings)

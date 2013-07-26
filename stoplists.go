@@ -3,7 +3,6 @@ package justext
 import (
 	"bytes"
 	"errors"
-	"log"
 	"fmt"
 	"io/ioutil"
 )
@@ -121,10 +120,10 @@ func RegisterStoplist(name string, resourceFunc ResourceFunc) {
 }
 */
 
-func ReadStoplist(filename string) map[string]bool {
+func ReadStoplist(filename string) (map[string]bool, error) {
 	data, err := ioutil.ReadFile(filename)
 	if err != nil {
-		log.Fatal(err)
+		return nil, err
 	}
 
 	db := bytes.Split(data, []uint8("\n"))
@@ -135,7 +134,7 @@ func ReadStoplist(filename string) map[string]bool {
 		list[string(val)] = true
 	}
 
-	return list
+	return list, nil
 }
 
 func GetStoplist(language string) (map[string]bool, error) {
@@ -145,7 +144,7 @@ func GetStoplist(language string) (map[string]bool, error) {
 
 	data, err := stoplists[language]()
 	if err != nil {
-		log.Fatal(err)
+		return nil, err
 	}
 	db := bytes.Split(data, []uint8("\n"))
 

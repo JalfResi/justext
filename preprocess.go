@@ -2,22 +2,21 @@ package justext
 
 import (
 	"github.com/peterbourgon/exp-html"
-	"log"
 	"regexp"
 	"strings"
 )
 
-func preprocess(htmlStr, encoding, defaultEncoding, encErrors string) *html.Node {
+func preprocess(htmlStr, encoding, defaultEncoding, encErrors string) (*html.Node, error) {
 
 	root, err := html.Parse(strings.NewReader(htmlStr))
 	if err != nil {
-		log.Fatal(err)
+		return nil, err
 	}
 
 	addKwTags(root)
 	removeElements(root, []string{"head", "script", "style"})
 
-	return root
+	return root, nil
 }
 
 type nodeIterator func(n *html.Node)

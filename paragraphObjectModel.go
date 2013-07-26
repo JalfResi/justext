@@ -3,7 +3,6 @@ package justext
 import (
 	"github.com/peterbourgon/exp-html"
 	"io"
-	"log"
 	"regexp"
 	"strings"
 	"fmt"
@@ -95,8 +94,7 @@ func paragraphObjectModel(htmlStr string) ([]*Paragraph, error) {
 				return paragraphs, nil
 			}
 			if matchToDoErrors.MatchString(fmt.Sprintf("%s", z.Err())) {
-				log.Println("ToDo Error")
-				log.Fatal(z.Err())
+				return nil, z.Err()
 			}
 			continue
 

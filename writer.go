@@ -69,7 +69,7 @@ func (w *Writer) outputDefault(paragraphs []*Paragraph) error {
 
 	templ, err := t.Parse(string(templateData))
 	if err != nil {
-		log.Fatal(err)
+		return err
 	}
 
 	var data = struct {
@@ -104,7 +104,7 @@ func (w *Writer) outputDetailed(paragraphs []*Paragraph) error {
 
 	templ, err := t.Parse(string(templateData))
 	if err != nil {
-		log.Fatal(err)
+		return err
 	}
 
 	var data = struct {

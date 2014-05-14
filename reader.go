@@ -2,7 +2,7 @@ package justext
 
 import (
 	"fmt"
-	"github.com/peterbourgon/exp-html"
+	"github.com/levigross/exp-html"
 	"io"
 	"io/ioutil"
 	"strings"

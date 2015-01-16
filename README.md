@@ -34,7 +34,7 @@ Example usage:
     reader.StopwordsLow = 0.3
     reader.StopwordsHigh = 0.32
     reader.MaxLinkDensity = 0.2
-    reader.MaxHeadingDistancex = 200
+    reader.MaxHeadingDistance = 200
     reader.NoHeadings = false
     
     // Read from the reader to generate a paragraph set

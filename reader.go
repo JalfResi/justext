@@ -1,12 +1,12 @@
 package justext
 
 import (
+	"errors"
 	"fmt"
 	"github.com/levigross/exp-html"
 	"io"
 	"io/ioutil"
 	"strings"
-	"errors"
 )
 
 type Reader struct {

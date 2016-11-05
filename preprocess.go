@@ -48,8 +48,8 @@ func addKwTags(root *html.Node) *html.Node {
 		} else {
 			kw := &html.Node{
 				Parent: nil,
-				Type: html.ElementNode,
-				Data: "kw",
+				Type:   html.ElementNode,
+				Data:   "kw",
 			}
 			node2 := CopyNode(node, true)
 			kw.Child = append(kw.Child, node2)
@@ -97,14 +97,14 @@ func CopyNode(node *html.Node, deep bool) *html.Node {
 		Data: node.Data,
 	}
 
-	if deep && len(node.Child)>0 {
+	if deep && len(node.Child) > 0 {
 		for _, n := range node.Child {
 			newNode.Child = append(newNode.Child, CopyNode(n, true))
 		}
 	}
 
 	for _, i := range node.Attr {
-		newNode.Attr = append(newNode.Attr, html.Attribute{Key:i.Key, Val:i.Val})
+		newNode.Attr = append(newNode.Attr, html.Attribute{Key: i.Key, Val: i.Val})
 	}
 
 	return newNode

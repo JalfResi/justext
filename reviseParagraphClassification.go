@@ -2,7 +2,7 @@ package justext
 
 // Context-sensitive paragraph classification. Assumes that classify_pragraphs has already been called.
 func reviseParagraphClassification(paragraphs []*Paragraph, maxHeadingDistance int) {
-	
+
 	// Copy classes
 	for _, paragraph := range paragraphs {
 		paragraph.Class = paragraph.CfClass
@@ -47,7 +47,7 @@ func reviseParagraphClassification(paragraphs []*Paragraph, maxHeadingDistance i
 			newClasses[i] = "good"
 		} else if _, ok := neighbours["bad"]; ok && len(neighbours) == 1 {
 			newClasses[i] = "bad"
-		// neighbours must contain both good and bad
+			// neighbours must contain both good and bad
 		} else if (prevNeighbour == "bad" && getPrevNeighbour(i, paragraphs, false) == "neargood") || (nextNeighbour == "bad" && getNextNeighbour(i, paragraphs, false) == "neargood") {
 			newClasses[i] = "good"
 		} else {
@@ -92,7 +92,7 @@ func reviseParagraphClassification(paragraphs []*Paragraph, maxHeadingDistance i
 			distance += len(paragraphs[j].Text)
 			j += 1
 		}
-	}	
+	}
 }
 
 func getPrevNeighbour(i int, paragraphs []*Paragraph, ignoreNeargood bool) string {
@@ -105,7 +105,7 @@ func getNextNeighbour(i int, paragraphs []*Paragraph, ignoreNeargood bool) strin
 
 func getNeighbour(i int, paragraphs []*Paragraph, ignoreNeargood bool, inc int, boundary int) string {
 	for i+inc != boundary {
-		i+=inc
+		i += inc
 		var c string = paragraphs[i].Class
 		if c == "good" || c == "bad" {
 			return c

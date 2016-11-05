@@ -2,7 +2,6 @@ package justext
 
 import (
 	"fmt"
-	"github.com/levigross/exp-html"
 	"log"
 	"strings"
 )
@@ -31,7 +30,7 @@ func nodesToString(node *html.Node) string {
 
 	switch node.Type {
 	case html.TextNode:
-		response = fmt.Sprintf("%s", html.EscapeString(strings.TrimSpace(node.Data)))
+		response = html.EscapeString(strings.TrimSpace(node.Data))
 
 	case html.ElementNode, html.DoctypeNode:
 		var att string = ""
@@ -60,8 +59,11 @@ func nodesToString(node *html.Node) string {
 			}
 		}
 
+	case html.CommentNode:
+		// ignore
+
 	default:
-		log.Printf("Unhandled node: %s\n", nodeTypeToString(node))
+		log.Printf("Unhandled node: %s", nodeTypeToString(node))
 	}
 	return response
 }

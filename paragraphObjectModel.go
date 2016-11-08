@@ -1,11 +1,11 @@
 package justext
 
 import (
+	"fmt"
 	"github.com/levigross/exp-html"
 	"io"
 	"regexp"
 	"strings"
-	"fmt"
 )
 
 var (

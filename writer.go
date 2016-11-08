@@ -130,12 +130,12 @@ func (w *Writer) OutputDebug(paragraphs []*Paragraph) {
 }
 
 // TO-DO:
-// Need an output feature that returns a de-duped space separated text file of all the 
+// Need an output feature that returns a de-duped space separated text file of all the
 // words in the output document sans-boilerplate. Also needs option to exclude stoplist
 // words from that output too.
 
 // TO-DO:
-// Need an output feature that returns the content of a stop list (or do we just make 
+// Need an output feature that returns the content of a stop list (or do we just make
 // the function getStoplist public? Might be a lot easier...)
 
 /*
@@ -152,7 +152,7 @@ func (w *Writer) outputKrdwrd(paragraphs []*Paragraph) (output string) {
 			cls = 1
 		}
 		for _, textNode := range paragraph.TextNodes {
-			output = fmt.Sprintf("%s%i\t%s", output, cls, strings.TrimSpace(textNode))		
+			output = fmt.Sprintf("%s%i\t%s", output, cls, strings.TrimSpace(textNode))
 		}
 	}
 

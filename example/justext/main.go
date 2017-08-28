@@ -2,9 +2,10 @@ package main
 
 import (
 	"flag"
-	"github.com/JalfResi/gojustext"
 	"log"
 	"os"
+
+	"github.com/JalfResi/justext"
 )
 
 var (
@@ -24,12 +25,17 @@ var (
 func main() {
 	flag.Parse()
 
-	var stoplist map[string]bool
+	var (
+		err      error
+		stoplist map[string]bool
+	)
 
 	if *stoplistFilename != "" {
-		stoplist = justext.ReadStoplist(*stoplistFilename)
+		stoplist, err = justext.ReadStoplist(*stoplistFilename)
+		if err != nil {
+			log.Fatal(err)
+		}
 	} else {
-		var err error
 		stoplist, err = justext.GetStoplist(*stoplistLanguage)
 		if err != nil {
 			log.Fatal(err)
